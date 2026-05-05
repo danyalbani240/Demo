@@ -18,7 +18,7 @@ export type ServiceItem = {
   _id?: string;
   title?: string | null;
   description?: string | null;
-  price?: string | number | null;
+  price?: number;
   durationMinutes?: number | string | null;
   category?: string | number | null;
 };

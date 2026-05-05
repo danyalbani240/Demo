@@ -505,7 +505,7 @@ const form = reactive({
   name: "",
   email: "",
   phone: "",
-  topic: "" as string | null,
+  topic: "" as string | undefined,
   message: "",
   agree: false,
   // honeypot (bots tend to fill it)

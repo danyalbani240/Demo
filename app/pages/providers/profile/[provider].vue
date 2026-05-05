@@ -204,7 +204,11 @@
 
                   <div class="text-left">
                     <p class="font-bold">
-                      {{ formatPrice(service.price) }}
+                      {{
+                        formatPrice(
+                          service.price === undefined ? 0 : +service?.price,
+                        )
+                      }}
                       تومان
                     </p>
                     <p
@@ -352,7 +356,7 @@ const { data, error } = await useAsyncData(
 
 if (error.value) {
   console.error("provider load error:", error.value);
-  provider.value = null;
+  provider.value = undefined;
   gallery.value = { samples: [] };
 } else if (data.value) {
   provider.value = data.value.provider as Provider;
