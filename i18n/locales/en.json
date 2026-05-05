@@ -1,0 +1,212 @@
+{
+  "home": {
+    "hero": {
+      "title": "Book appointments from specialists, without calls or stressful coordination",
+      "subtitle": "Top specialists near you. Compare, check real availability, and book easily.",
+      "badge_calendar": "Accurate booking calendar",
+      "badge_fast": "Fast booking",
+      "badge_trust": "Real data and feedback",
+
+      "card": {
+        "title": "Booking with real-time calendar",
+        "desc": "See real availability—no overlaps, no “call later”.",
+        "active_providers": "Active specialists",
+
+        "features": {
+          "real_time": "Real availability",
+          "real_time_sub": "Accurate time slots",
+          "profile": "Transparent profile",
+          "profile_sub": "Price / services / portfolio",
+          "quick_booking": "Fast booking",
+          "quick_booking_sub": "Only a few clicks"
+        },
+
+        "city_start": "Starting from Sanandaj",
+        "city_sub": "More specialists will be added over time."
+      }
+    },
+
+    "categories": {
+      "title": "Popular service categories"
+    },
+
+    "howItWorks": {
+      "title": "How does it work?",
+      "step1": {
+        "title": "Search and compare",
+        "desc": "Choose service, city, and time; check prices and ratings."
+      },
+      "step2": {
+        "title": "Book with accurate calendar",
+        "desc": "Pick the best time; scheduling conflicts are removed."
+      },
+      "step3": {
+        "title": "Service + feedback",
+        "desc": "The service is completed; share your experience."
+      }
+    },
+
+    "providers": {
+      "title": "Featured specialists on ServiceHub",
+      "view_all": "View all",
+      "error": "Error loading specialists."
+    },
+
+    "cta": {
+      "title": "Get started now",
+      "subtitle": "Fast and transparent booking.",
+      "customer_signup": "Customer sign up",
+      "provider_signup": "Provider sign up"
+    }
+  },
+  "header": {
+    "brand": "ServiceHub",
+    "badge": {
+      "safe_payment": "Secure payment",
+      "separator": "•"
+    },
+    "nav": {
+      "search": "Find specialists",
+      "help": "Help",
+      "contact": "Contact"
+    },
+    "theme": {
+      "toggle": "Toggle dark mode"
+    },
+    "auth": {
+      "login_register": "Login / Register",
+      "provider_register": "Provider signup"
+    }
+  },
+  "footer": {
+    "about_title": "About us",
+    "about_description": "A bridge connecting customers with verified professionals; transparency, security, and an excellent user experience.",
+    "about_hours_label": "Support hours",
+
+    "help_title": "Help",
+    "help_faq": "FAQ",
+    "help_specialists": "Specialists",
+    "help_policies": "Terms & Privacy",
+    "help_contact": "Contact us",
+
+    "trust_title": "Trust & Transparency",
+    "trust_verification": "Professional verification",
+    "trust_ratings": "Rating & feedback system",
+    "trust_refund": "Refund guarantee",
+
+    "newsletter_title": "Newsletter",
+    "newsletter_placeholder": "Your email",
+    "newsletter_submit": "Send",
+
+    "bottom_product": "A product by Danial Bani",
+    "bottom_rights": "All rights reserved."
+  },
+  "provider": {
+    "verified": "Verified",
+    "instant_booking": "Instant booking",
+    "inactive_booking": "Booking unavailable",
+    "start_from": "Starting from"
+  },
+  "actions": {
+    "services": "Services",
+    "profile": "Profile",
+    "book": "Book"
+  },
+  "currency": {
+    "toman": "Toman"
+  },
+  "search": {
+    "home": "Home",
+    "providers": "Providers",
+    "title": "Providers",
+    "subtitle": "Search by provider name or service — then book.",
+    "reset": "Reset",
+    "search_placeholder": "Provider or service name…",
+    "category": "Category",
+    "city": "City",
+    "more_filters": "More filters",
+    "search_for": "for \"{q}\"",
+    "advanced_title": "Advanced Filters",
+    "close": "Close",
+    "min_rating": "Minimum rating",
+    "immediate": "Immediate booking (24h)",
+    "min_price": "Minimum price",
+    "max_price": "Maximum price",
+    "apply_filters": "Apply filters"
+  },
+  "faq": {
+    "title": "Help & FAQ",
+    "subtitle": "Find answers to common questions. If you can’t find yours, contact us.",
+    "search": "Search questions…",
+    "contact_support": "Contact support",
+    "go_to": "Go to section",
+    "and": "and",
+    "sections": {
+      "acc": "Account",
+      "booking": "Booking & Payment",
+      "trust": "Trust & Safety"
+    },
+    "quick": {
+      "acc": {
+        "title": "Signup & Login",
+        "desc": "Create account, login with phone and password, SMS verification if required."
+      },
+      "booking": {
+        "title": "Booking & Payment",
+        "desc": "Instant booking, deposit, cancellation and refund rules."
+      },
+      "trust": {
+        "title": "Trust & Safety",
+        "desc": "Provider verification, quality guarantee, and reporting."
+      }
+    },
+    "help": {
+      "title": "Still need help?",
+      "contact": "Send message",
+      "policies": "View policies"
+    },
+    "items": [
+      {
+        "key": "signup",
+        "c": "acc",
+        "q": "How do I sign up?",
+        "a": "On the signup page, enter your phone number, password, and account role. If SMS verification is enabled, you will receive a code."
+      },
+      {
+        "key": "password",
+        "c": "acc",
+        "q": "Forgot password?",
+        "a": "Use the password recovery option. Login is done with phone number and password, and some accounts require SMS verification."
+      },
+      {
+        "key": "instant",
+        "c": "booking",
+        "q": "How does instant booking work?",
+        "a": "Select an available time, pay the deposit, and the booking is held until final confirmation."
+      },
+      {
+        "key": "cancel",
+        "c": "booking",
+        "q": "What is the cancellation policy?",
+        "a": ""
+      },
+      {
+        "key": "verify",
+        "c": "trust",
+        "q": "Are providers verified?",
+        "a": "Yes, identity and background are checked, and a verification badge is shown."
+      },
+      {
+        "key": "refund",
+        "c": "trust",
+        "q": "How does the quality guarantee work?",
+        "a": ""
+      }
+    ],
+    "dynamic": {
+      "cancel": "Cancellation is free up to {hours} hours before the start time. For closer times, final penalty details are being completed.",
+      "refund_with_amount": "If dissatisfaction is confirmed, refunds are issued up to {amount} toman.",
+      "refund_fallback": "Refund policy details are being finalized and will be announced on the policy page."
+    }
+  }
+}

@@ -1,0 +1,197 @@
+@import "vazirmatn/Vazirmatn-font-face.css";
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+body {
+  font-family: "Vazirmatn", sans-serif !important;
+}
+
+[aria-controls*="reka-select-content-v"] {
+  direction: rtl;
+}
+
+/*  rtling the select */
+
+[data-reka-popper-content-wrapper] .isolate {
+  direction: rtl !important;
+}
+/*fix */
+/* assets/css/main.css */
+
+.page-canvas {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+
+  /* مهم: خود صفحه به صورت "surface" نرم */
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  /* box-shadow: 0 20px 60px rgba(2, 6, 23, 0.06); */
+}
+
+.dark .page-canvas {
+  background: rgba(2, 6, 23, 0.35);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  /* box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4); */
+}
+
+/* ✅ Fade edges: جعبه "قطع" نمی‌شود، در بک‌گراند حل می‌شود */
+/* .page-canvas--fade::before,
+.page-canvas--fade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+} */
+
+/* Fade نرم در لبه‌ها (مثل vignette خیلی ظریف) */
+/* .page-canvas--fade::before {
+  background: radial-gradient(
+    140% 90% at 50% 10%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.65) 70%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+} */
+
+/* .dark .page-canvas--fade::before {
+  background: radial-gradient(
+    140% 90% at 50% 10%,
+    rgba(2, 6, 23, 0) 35%,
+    rgba(2, 6, 23, 0.45) 70%,
+    rgba(2, 6, 23, 0.75) 100%
+  );
+  opacity: 0.55;
+} */
+
+/* Soft inner edge (این باعث میشه مرز مستطیلی “شکسته” بشه) */
+/* .page-canvas--fade::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+    inset 0 0 60px rgba(2, 6, 23, 0.06);
+  opacity: 0.55;
+} */
+
+/* .dark .page-canvas--fade::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(148, 163, 184, 0.08),
+    inset 0 0 80px rgba(0, 0, 0, 0.55);
+  opacity: 0.9;
+} */
+
+/* خیلی مهم: محتوای داخل canvas روی pseudo elements بیاد */
+/* .page-canvas > * {
+  position: relative;
+  z-index: 2;
+} */
+
+/* Fix iOS Safari + Firefox form control rendering WITHOUT changing your styles */
+:where(input, textarea, select) {
+  -webkit-appearance: none; /* iOS Safari */
+  appearance: none; /* Firefox/Safari */
+  background-clip: padding-box;
+  border-style: solid; /* critical: ensures border actually paints */
+}
+
+/* Prevent iOS Safari auto-zoom on focus */
+@supports (-webkit-touch-callout: none) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Dark mode smooth transitions */
+/* * {
+  @apply transition-colors duration-300;
+} */
+
+/* Prevent transition on load */
+html:not(.dark-loaded) body {
+  @apply !transition-none;
+}
+
+html.dark-loaded body {
+  @apply transition-colors duration-300;
+}
+
+/* Premium gradient backgrounds */
+.dark {
+  color-scheme: dark;
+}
+
+/* Smooth scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(100, 116, 139);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(71, 85, 105);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgb(51, 65, 85);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgb(71, 85, 105);
+}
+
+/* Animated gradient */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* .animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+} */
+
+/* Glass morphism effect */
+.glass {
+  @apply backdrop-blur-md bg-white/10 dark:bg-slate-900/40 border border-white/20 dark:border-slate-700/50;
+}
+
+/* Smooth focus ring */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary-500 dark:ring-primary-400 ring-offset-2 dark:ring-offset-slate-950;
+}
+
+/* Premium shadows */
+.shadow-premium {
+  @apply shadow-lg dark:shadow-xl dark:shadow-primary-500/10;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: all 0.3s;
+}
+
+.hover-lift:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.2);
+}
