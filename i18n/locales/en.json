@@ -208,5 +208,114 @@
       "refund_with_amount": "If dissatisfaction is confirmed, refunds are issued up to {amount} toman.",
       "refund_fallback": "Refund policy details are being finalized and will be announced on the policy page."
     }
+  },
+  "policy": {
+    "header": {
+      "badge": "ServiceHub Official Document",
+      "updated": "Last updated:",
+      "title": "Terms, Privacy & Policies",
+      "description": "Our goal is transparency and a secure experience. This page explains what is allowed, what data we collect, and how cancellation and refund policies work."
+    },
+    "actions": { "contact": "Contact Support", "help": "Go to Help" },
+    "toc": {
+      "title": "Sections",
+      "subtitle": "Quick navigation",
+      "desktopHint": "Click an item to scroll",
+      "question": "Need help?",
+      "support": "Support",
+      "items": [
+        { "label": "Terms of Use", "href": "#terms" },
+        { "label": "Privacy Policy", "href": "#privacy" },
+        { "label": "Cancellation & Refund", "href": "#cancellation" },
+        { "label": "Cookies", "href": "#cookies" }
+      ]
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "subtitle": "Platform usage framework and responsibilities",
+      "items": [
+        "Users must provide accurate information.",
+        "Reservations are valid based on announced times.",
+        "Any illegal activity is prohibited.",
+        "ServiceHub may suspend accounts in case of violations."
+      ]
+    },
+    "privacy": {
+      "title": "Privacy",
+      "subtitle": "Transparency about data usage",
+      "description": "Your data such as name, phone number, and booking history are used only to provide and improve services.",
+      "rightsTitle": "Your Rights",
+      "rights": [
+        "Request account deletion",
+        "Edit profile information",
+        "Receive support responses"
+      ],
+      "permissionsTitle": "Permissions",
+      "permissions": [
+        "Microphone/location only with permission",
+        "You can disable access anytime"
+      ]
+    },
+    "cookies": {
+      "title": "Cookies",
+      "subtitle": "For security and better experience",
+      "description": "Cookies are used for secure login and improving user experience."
+    },
+    "cancellation": {
+      "title": "Cancellation & Refund",
+      "subtitle": "Fair policies regarding time and commitments",
+
+      "highlights": [
+        {
+          "label": "Free Cancellation",
+          "value": "Up to 24 hours before",
+          "note": "Full deposit refund"
+        },
+        {
+          "label": "Late Cancellation",
+          "value": "Penalty applies",
+          "note": "Part of the deposit may be deducted"
+        },
+        {
+          "label": "No‑show",
+          "value": "No refund",
+          "note": "If the customer does not inform in advance"
+        },
+        {
+          "label": "Provider Cancellation",
+          "value": "Full refund",
+          "note": "Alternative time will be suggested"
+        }
+      ],
+
+      "rules": {
+        "free": {
+          "before": "Cancellation up to",
+          "hours": "hours",
+          "after": "before service start: full deposit refund."
+        },
+        "late": {
+          "before": "Less than this window:",
+          "after": "is recorded as a cancellation fee."
+        },
+        "noShow": {
+          "before": "Customer no‑show without notice:",
+          "after": "refund."
+        },
+        "provider": {
+          "before": "Cancellation by provider:",
+          "after": "refund + alternative time offered."
+        }
+      },
+
+      "important": {
+        "title": "Important",
+        "text": "If a dispute occurs, first contact support through the app so the issue can be reviewed and resolved faster."
+      }
+    }
+  },
+  "newsletter": {
+    "invalidEmail": "Invalid email address",
+    "success": "Subscription successful"
   }
 }

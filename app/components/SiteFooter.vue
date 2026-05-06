@@ -1,17 +1,17 @@
 <template>
   <footer
+    :dir="$i18n.locale === 'en' ? 'ltr' : 'rtl'"
     class="bg-white dark:bg-slate-900/50 border-t border-gray-200 dark:border-slate-800 mt-10 transition-colors duration-300"
   >
     <UContainer class="py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
       <!-- درباره ما -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
-          {{ $t('footer.about_title') }}
+          {{ $t("footer.about_title") }}
         </p>
 
         <p class="text-sm text-gray-600 dark:text-slate-400 leading-7">
-          {{ $t('footer.about_description') }}
+          {{ $t("footer.about_description") }}
         </p>
 
         <p class="mt-3 text-sm text-gray-600 dark:text-slate-400">
@@ -22,7 +22,7 @@
       <!-- راهنما -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
-          {{ $t('footer.help_title') }}
+          {{ $t("footer.help_title") }}
         </p>
 
         <ul class="space-y-2 text-sm">
@@ -31,7 +31,7 @@
               to="/help"
               class="text-gray-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
             >
-              {{ $t('footer.help_faq') }}
+              {{ $t("footer.help_faq") }}
             </NuxtLink>
           </li>
 
@@ -40,7 +40,7 @@
               to="/search"
               class="text-gray-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
             >
-              {{ $t('footer.help_specialists') }}
+              {{ $t("footer.help_specialists") }}
             </NuxtLink>
           </li>
 
@@ -49,7 +49,7 @@
               to="/policies"
               class="text-gray-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
             >
-              {{ $t('footer.help_policies') }}
+              {{ $t("footer.help_policies") }}
             </NuxtLink>
           </li>
 
@@ -58,7 +58,7 @@
               to="/contact"
               class="text-gray-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
             >
-              {{ $t('footer.help_contact') }}
+              {{ $t("footer.help_contact") }}
             </NuxtLink>
           </li>
         </ul>
@@ -67,37 +67,34 @@
       <!-- اعتماد و شفافیت -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
-          {{ $t('footer.trust_title') }}
+          {{ $t("footer.trust_title") }}
         </p>
 
         <ul class="space-y-2 text-sm text-gray-600 dark:text-slate-400">
-
           <li>
             <NuxtLink to="/trust/provider-verification">
-              {{ $t('footer.trust_verification') }}
+              {{ $t("footer.trust_verification") }}
             </NuxtLink>
           </li>
 
           <li>
             <NuxtLink to="/trust/ratings-feedback">
-              {{ $t('footer.trust_ratings') }}
+              {{ $t("footer.trust_ratings") }}
             </NuxtLink>
           </li>
 
           <li>
             <NuxtLink to="/trust/refund-guarantee">
-              {{ $t('footer.trust_refund') }}
+              {{ $t("footer.trust_refund") }}
             </NuxtLink>
           </li>
         </ul>
-
-   
       </div>
 
       <!-- خبرنامه -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
-          {{ $t('footer.newsletter_title') }}
+          {{ $t("footer.newsletter_title") }}
         </p>
 
         <div class="flex gap-2">
@@ -112,7 +109,7 @@
             @click="subscribe"
             class="hover:scale-105 transition-transform duration-300"
           >
-            {{ $t('footer.newsletter_submit') }}
+            {{ $t("footer.newsletter_submit") }}
           </UButton>
         </div>
       </div>
@@ -123,12 +120,10 @@
       class="border-t border-gray-200 dark:border-slate-800 py-4 text-center text-sm text-gray-600 dark:text-slate-400 transition-colors duration-300"
     >
       <p class="mb-2">
-        {{ $t('footer.bottom_product') }}
+        {{ $t("footer.bottom_product") }}
       </p>
 
-      <p>
-        © {{ new Date().getFullYear() }} {{ $t('footer.bottom_rights') }}
-      </p>
+      <p>© {{ new Date().getFullYear() }} {{ $t("footer.bottom_rights") }}</p>
     </div>
   </footer>
 </template>
@@ -139,13 +134,22 @@ import { siteCopy } from "~/constants/site";
 const email = ref("");
 const toast = useToast();
 
+const { t } = useI18n();
 
 function subscribe(): void {
   if (!/.+@.+\..+/.test(email.value)) {
-    toast.add({ title: "ایمیل نامعتبر است", color: "warning" });
+    toast.add({
+      title: t("newsletter.invalidEmail"),
+      color: "warning",
+    });
     return;
   }
-  toast.add({ title: "عضویت با موفقیت انجام شد", color: "success" });
+
+  toast.add({
+    title: t("newsletter.success"),
+    color: "success",
+  });
+
   email.value = "";
 }
 </script>

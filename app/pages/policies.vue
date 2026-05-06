@@ -1,9 +1,8 @@
 <template>
   <div
-    dir="rtl"
+    :dir="$i18n.locale === 'en' ? 'ltr' : 'rtl'"
     class="relative min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 text-gray-900 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 dark:text-slate-50"
   >
-    <!-- Soft premium glow -->
     <div
       class="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden="true"
@@ -23,27 +22,29 @@
           class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 px-3 py-1 text-xs font-medium text-gray-700 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-200"
         >
           <span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span>
-          سند رسمی سرویس‌هاب
+
+          {{ $t("policy.header.badge") }}
+
           <span class="text-gray-400 dark:text-slate-500">•</span>
-          آخرین به‌روزرسانی: <span class="tabular-nums">{{ updatedAt }}</span>
+
+          {{ $t("policy.header.updated") }}
+          <span class="tabular-nums">{{ updatedAt }}</span>
         </div>
 
         <div class="mt-4 flex flex-col gap-3">
           <h1
             class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight"
           >
-            قوانین، حریم خصوصی و سیاست‌ها
+            {{ $t("policy.header.title") }}
           </h1>
+
           <p
             class="max-w-2xl text-sm sm:text-base leading-7 text-gray-600 dark:text-slate-300"
           >
-            هدف ما شفافیت و امنیت تجربهٔ شماست. این صفحه توضیح می‌دهد چه مواردی
-            مجاز است، چه داده‌هایی جمع‌آوری می‌شود و سیاست‌های لغو/استرداد چگونه
-            عمل می‌کنند.
+            {{ $t("policy.header.description") }}
           </p>
         </div>
 
-        <!-- Mobile quick actions -->
         <div class="mt-4 flex flex-col sm:flex-row gap-2 sm:items-center">
           <UButton
             color="primary"
@@ -51,15 +52,16 @@
             class="justify-center"
             @click="navigateTo('/contact')"
           >
-            تماس با پشتیبانی
+            {{ $t("policy.actions.contact") }}
           </UButton>
+
           <UButton
             variant="outline"
             size="md"
             class="justify-center"
             @click="navigateTo('/help')"
           >
-            رفتن به راهنما
+            {{ $t("policy.actions.help") }}
           </UButton>
         </div>
       </header>
@@ -67,7 +69,7 @@
       <div class="grid lg:grid-cols-12 gap-4 lg:gap-6">
         <!-- TOC -->
         <aside class="lg:col-span-4">
-          <!-- Mobile: collapsible -->
+          <!-- Mobile -->
           <UCard
             class="lg:hidden overflow-hidden border border-gray-200 bg-white/70 backdrop-blur dark:border-slate-800 dark:bg-slate-900/50"
           >
@@ -78,61 +80,39 @@
                 <div class="flex items-center gap-2">
                   <span
                     class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 dark:bg-slate-800 dark:text-slate-200"
+                    >☰</span
                   >
-                    ☰
-                  </span>
+
                   <div>
-                    <p class="text-sm font-semibold">فهرست بخش‌ها</p>
+                    <p class="text-sm font-semibold">
+                      {{ $t("policy.toc.title") }}
+                    </p>
                     <p
                       class="text-xs text-gray-500 dark:text-slate-400 -mt-0.5"
                     >
-                      برای رفتن سریع به هر بخش
+                      {{ $t("policy.toc.subtitle") }}
                     </p>
                   </div>
                 </div>
+
                 <span
                   class="text-gray-500 transition-transform group-open:rotate-180 dark:text-slate-400"
+                  >▼</span
                 >
-                  ▼
-                </span>
               </summary>
 
               <nav class="px-4 pb-4 text-sm">
                 <ul class="space-y-2">
-                  <li>
+                  <li
+                    v-for="item in $tm('policy.toc.items')"
+                    :key="$rt(item.href)"
+                  >
                     <a
-                      href="#terms"
+                      :href="$rt(item.href)"
                       class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
                       @click="closeDetailsOnClick"
                     >
-                      شرایط استفاده
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#privacy"
-                      class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
-                      @click="closeDetailsOnClick"
-                    >
-                      حریم خصوصی
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#cancellation"
-                      class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
-                      @click="closeDetailsOnClick"
-                    >
-                      لغو و استرداد
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#cookies"
-                      class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
-                      @click="closeDetailsOnClick"
-                    >
-                      کوکی‌ها
+                      {{ $rt(item.label) }}
                     </a>
                   </li>
                 </ul>
@@ -140,50 +120,32 @@
             </details>
           </UCard>
 
-          <!-- Desktop: sticky -->
+          <!-- Desktop -->
           <div class="hidden lg:block sticky top-16">
             <UCard
               class="overflow-hidden border border-gray-200 bg-white/70 backdrop-blur dark:border-slate-800 dark:bg-slate-900/50"
             >
               <div class="p-4 border-b border-gray-100 dark:border-slate-800">
-                <p class="text-sm font-semibold">فهرست بخش‌ها</p>
+                <p class="text-sm font-semibold">
+                  {{ $t("policy.toc.title") }}
+                </p>
+
                 <p class="text-xs mt-1 text-gray-500 dark:text-slate-400">
-                  روی هر مورد بزنید تا اسکرول شود
+                  {{ $t("policy.toc.desktopHint") }}
                 </p>
               </div>
 
               <nav class="p-3 text-sm">
                 <ul class="space-y-1">
-                  <li>
+                  <li
+                    v-for="item in $tm('policy.toc.items')"
+                    :key="$rt(item.href)"
+                  >
                     <a
-                      href="#terms"
+                      :href="$rt(item.href)"
                       class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
                     >
-                      شرایط استفاده
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#privacy"
-                      class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
-                    >
-                      حریم خصوصی
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#cancellation"
-                      class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
-                    >
-                      لغو و استرداد
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#cookies"
-                      class="block rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100/70 hover:text-gray-900 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-white"
-                    >
-                      کوکی‌ها
+                      {{ $rt(item.label) }}
                     </a>
                   </li>
                 </ul>
@@ -194,14 +156,15 @@
                   class="flex items-center justify-between gap-2 rounded-2xl border border-gray-200 bg-white/70 p-3 shadow-sm dark:border-slate-800 dark:bg-slate-950/40"
                 >
                   <p class="text-xs text-gray-600 dark:text-slate-300">
-                    سوال دارید؟
+                    {{ $t("policy.toc.question") }}
                   </p>
+
                   <UButton
                     color="primary"
                     size="xs"
                     @click="navigateTo('/contact')"
                   >
-                    پشتیبانی
+                    {{ $t("policy.toc.support") }}
                   </UButton>
                 </div>
               </div>
@@ -222,14 +185,16 @@
                 >
                   📌
                 </div>
+
                 <div>
                   <h2 class="text-lg sm:text-xl font-extrabold tracking-tight">
-                    شرایط استفاده
+                    {{ $t("policy.terms.title") }}
                   </h2>
+
                   <p
                     class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-slate-300"
                   >
-                    چارچوب کلی استفاده از پلتفرم و مسئولیت‌ها
+                    {{ $t("policy.terms.subtitle") }}
                   </p>
                 </div>
               </div>
@@ -237,18 +202,8 @@
               <ul
                 class="list-disc pr-5 text-sm sm:text-base leading-8 text-gray-700 dark:text-slate-200 space-y-2"
               >
-                <li>
-                  کاربران موظف‌اند اطلاعات واقعی و دقیق ثبت کنند؛ مسئولیت صحت
-                  داده‌های واردشده بر عهدهٔ خود کاربر است.
-                </li>
-                <li>
-                  رزروها طبق زمان‌های اعلامی معتبر است و رعایت زمان به عهدهٔ
-                  طرفین است.
-                </li>
-                <li>هرگونه فعالیت مغایر با قوانین کشور ممنوع است.</li>
-                <li>
-                  سرویس‌هاب می‌تواند در صورت تخلف، حساب کاربری را محدود یا تعلیق
-                  کند.
+                <li v-for="(item, i) in $tm('policy.terms.items')" :key="i">
+                  {{ $rt(item) }}
                 </li>
               </ul>
             </UCard>
@@ -265,14 +220,16 @@
                 >
                   🛡️
                 </div>
+
                 <div>
                   <h2 class="text-lg sm:text-xl font-extrabold tracking-tight">
-                    حریم خصوصی
+                    {{ $t("policy.privacy.title") }}
                   </h2>
+
                   <p
                     class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-slate-300"
                   >
-                    شفافیت دربارهٔ داده‌ها و نحوهٔ استفاده
+                    {{ $t("policy.privacy.subtitle") }}
                   </p>
                 </div>
               </div>
@@ -281,10 +238,7 @@
                 <p
                   class="text-sm sm:text-base leading-8 text-gray-700 dark:text-slate-200"
                 >
-                  داده‌های شما (نام، شماره تماس، سوابق رزرو) فقط برای ارائه و
-                  بهبود خدمات استفاده می‌شود. بدون رضایت شما به اشخاص ثالث
-                  فروخته نمی‌شود. اطلاعات حساس با استانداردهای امنیتی نگهداری
-                  می‌گردد.
+                  {{ $t("policy.privacy.description") }}
                 </p>
 
                 <div class="grid sm:grid-cols-2 gap-3">
@@ -294,14 +248,18 @@
                     <p
                       class="text-sm font-bold text-gray-900 dark:text-slate-50"
                     >
-                      حقوق شما
+                      {{ $t("policy.privacy.rightsTitle") }}
                     </p>
+
                     <ul
                       class="mt-2 list-disc pr-5 text-sm leading-7 text-gray-700 dark:text-slate-200 space-y-1"
                     >
-                      <li>حق درخواست حذف حساب و داده‌ها</li>
-                      <li>حق اصلاح اطلاعات پروفایل</li>
-                      <li>حق دریافت پاسخ از پشتیبانی</li>
+                      <li
+                        v-for="(item, i) in $tm('policy.privacy.rights')"
+                        :key="i"
+                      >
+                        {{ $rt(item) }}
+                      </li>
                     </ul>
                   </div>
 
@@ -311,20 +269,24 @@
                     <p
                       class="text-sm font-bold text-gray-900 dark:text-slate-50"
                     >
-                      مجوزها
+                      {{ $t("policy.privacy.permissionsTitle") }}
                     </p>
+
                     <ul
                       class="mt-2 list-disc pr-5 text-sm leading-7 text-gray-700 dark:text-slate-200 space-y-1"
                     >
-                      <li>دسترسی به میکروفون/لوکیشن فقط با اجازهٔ صریح شما</li>
-                      <li>می‌توانید هر زمان دسترسی‌ها را غیرفعال کنید</li>
+                      <li
+                        v-for="(item, i) in $tm('policy.privacy.permissions')"
+                        :key="i"
+                      >
+                        {{ $rt(item) }}
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </UCard>
           </section>
-
           <!-- CANCELLATION -->
           <section id="cancellation" class="scroll-mt-24">
             <UCard
@@ -336,32 +298,40 @@
                 >
                   💸
                 </div>
+
                 <div>
                   <h2 class="text-lg sm:text-xl font-extrabold tracking-tight">
-                    لغو و استرداد
+                    {{ $t("policy.cancellation.title") }}
                   </h2>
+
                   <p
                     class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-slate-300"
                   >
-                    سیاست‌های منصفانه برای زمان و تعهدات
+                    {{ $t("policy.cancellation.subtitle") }}
                   </p>
                 </div>
               </div>
 
               <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 <div
-                  v-for="item in cancellationHighlights"
-                  :key="item.label"
+                  v-for="item in $tm('policy.cancellation.highlights')"
+                  :key="$rt(item.label)"
                   class="rounded-2xl border border-gray-200 bg-white/60 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950/30"
                 >
                   <p class="text-xs text-gray-500 dark:text-slate-400">
-                    {{ item.label }}
+                    {{ $rt(item.label) }}
                   </p>
-                  <p class="mt-2 text-sm font-extrabold text-gray-900 dark:text-slate-50">
-                    {{ item.value }}
+
+                  <p
+                    class="mt-2 text-sm font-extrabold text-gray-900 dark:text-slate-50"
+                  >
+                    {{ $rt(item.value) }}
                   </p>
-                  <p class="mt-1 text-xs leading-6 text-gray-600 dark:text-slate-300">
-                    {{ item.note }}
+
+                  <p
+                    class="mt-1 text-xs leading-6 text-gray-600 dark:text-slate-300"
+                  >
+                    {{ $rt(item.note) }}
                   </p>
                 </div>
               </div>
@@ -370,27 +340,36 @@
                 class="mt-5 list-disc pr-5 text-sm sm:text-base leading-8 text-gray-700 dark:text-slate-200 space-y-2"
               >
                 <li>
-                  لغو تا
+                  {{ $t("policy.cancellation.rules.free.before") }}
                   <b class="font-extrabold">
-                    {{ policyConfig.cancellation.freeCancellationWindowHours.toLocaleString("fa-IR") }}
-                    ساعت
+                    {{
+                      policyConfig.cancellation.freeCancellationWindowHours.toLocaleString(
+                        $i18n.locale,
+                      )
+                    }}
+                    {{ $t("policy.cancellation.rules.free.hours") }}
                   </b>
-                  قبل از شروع سرویس: بازگشت کامل بیعانه.
+                  {{ $t("policy.cancellation.rules.free.after") }}
                 </li>
+
                 <li>
-                  کمتر از این بازه:
+                  {{ $t("policy.cancellation.rules.late.before") }}
                   <b class="font-extrabold">{{ cancellationFeePercentText }}</b>
-                  به‌عنوان جریمهٔ لغو ثبت می‌شود.
+                  {{ $t("policy.cancellation.rules.late.after") }}
                 </li>
+
                 <li>
-                  عدم حضور مشتری بدون اطلاع:
+                  {{ $t("policy.cancellation.rules.noShow.before") }}
                   <b class="font-extrabold">{{ noShowRefundText }}</b>
-                  بازگشت وجه.
+                  {{ $t("policy.cancellation.rules.noShow.after") }}
                 </li>
+
                 <li>
-                  لغو از سوی متخصص:
-                  <b class="font-extrabold">{{ providerCancellationRefundText }}</b>
-                  بازگشت وجه + پیشنهاد زمان جایگزین.
+                  {{ $t("policy.cancellation.rules.provider.before") }}
+                  <b class="font-extrabold">{{
+                    providerCancellationRefundText
+                  }}</b>
+                  {{ $t("policy.cancellation.rules.provider.after") }}
                 </li>
               </ul>
 
@@ -400,13 +379,13 @@
                 <p
                   class="text-sm font-extrabold text-amber-900 dark:text-amber-200"
                 >
-                  نکتهٔ مهم
+                  {{ $t("policy.cancellation.important.title") }}
                 </p>
+
                 <p
                   class="mt-1 text-sm leading-7 text-amber-900/80 dark:text-amber-100/80"
                 >
-                  اگر اختلافی پیش آمد، ابتدا از داخل پشتیبانی/تماس موضوع را مطرح
-                  کنید تا بررسی و حل‌وفصل سریع‌تر انجام شود.
+                  {{ $t("policy.cancellation.important.text") }}
                 </p>
               </div>
             </UCard>
@@ -423,14 +402,16 @@
                 >
                   🍪
                 </div>
+
                 <div>
                   <h2 class="text-lg sm:text-xl font-extrabold tracking-tight">
-                    کوکی‌ها
+                    {{ $t("policy.cookies.title") }}
                   </h2>
+
                   <p
                     class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-slate-300"
                   >
-                    برای امنیت، ورود و تجربهٔ بهتر
+                    {{ $t("policy.cookies.subtitle") }}
                   </p>
                 </div>
               </div>
@@ -438,45 +419,10 @@
               <p
                 class="text-sm sm:text-base leading-8 text-gray-700 dark:text-slate-200"
               >
-                برای ورود امن و بهبود تجربه از کوکی‌ها استفاده می‌کنیم.
-                می‌توانید از تنظیمات مرورگر مدیریت کنید؛ خاموش‌کردن برخی کوکی‌ها
-                ممکن است بخشی از امکانات را محدود کند.
+                {{ $t("policy.cookies.description") }}
               </p>
             </UCard>
           </section>
-
-          <!-- CTA -->
-          <UCard
-            class="border border-gray-200 bg-white/70 backdrop-blur dark:border-slate-800 dark:bg-slate-900/50 p-5 sm:p-6"
-          >
-            <div
-              class="flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-            >
-              <div>
-                <p class="text-sm font-semibold">پرسشی دربارهٔ قوانین دارید؟</p>
-                <p class="text-xs mt-1 text-gray-600 dark:text-slate-300">
-                  {{ siteCopy.supportHours }} و {{ siteCopy.supportResponseSla }}
-                </p>
-              </div>
-
-              <div class="flex flex-col sm:flex-row gap-2">
-                <UButton
-                  color="primary"
-                  class="justify-center"
-                  @click="navigateTo('/contact')"
-                >
-                  تماس با پشتیبانی
-                </UButton>
-                <UButton
-                  variant="outline"
-                  class="justify-center"
-                  @click="navigateTo('/help')"
-                >
-                  رفتن به راهنما
-                </UButton>
-              </div>
-            </div>
-          </UCard>
         </main>
       </div>
     </UContainer>

@@ -1,19 +1,10 @@
 <template>
   <header
+    :dir="$i18n.locale === 'en' ? 'ltr' : 'rtl'"
     class="bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-40 transition-colors duration-300"
   >
     <UContainer class="flex items-center justify-between h-16">
       <div class="flex items-center gap-3">
-        <USelectMenu
-          style="direction: rtl"
-          v-model="locale"
-          :items="items"
-          value-key="value"
-          label-key="label"
-          class="w-28 rtl"
-          @update:model-value="switchLang"
-        />
-
         <NuxtLink
           to="/"
           class="flex items-center gap-2 group hover:opacity-80 transition-opacity duration-300"
@@ -26,7 +17,15 @@
             {{ $t("header.brand") }}
           </span>
         </NuxtLink>
-
+        <USelectMenu
+          style="direction: rtl"
+          v-model="locale"
+          :items="items"
+          value-key="value"
+          label-key="label"
+          class="w-28 rtl"
+          @update:model-value="switchLang"
+        />
         <UBadge
           color="neutral"
           variant="soft"
