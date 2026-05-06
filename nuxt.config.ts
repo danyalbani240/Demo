@@ -59,8 +59,8 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      link: [{ rel: "manifest", href: "/manifest.webmanifest" }],
-      meta: [{ name: "enamad", content: "58583249" }],
+      // link: [{ rel: "manifest", href: "/manifest.webmanifest" }],
+      // meta: [{ name: "enamad", content: "58583249" }],
       // script: [
       //   {
       //     src: "https://cdn.kavenegar.com/sdk/page.js?appId=9e9186df-6b0f-4624-bc89-27a2dad29fa5",
@@ -77,11 +77,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       backendBaseURL:
-        process.env.NUXT_PUBLIC_BACKEND_BASE_URL ||
-        "https://big-project-production-01f5.up.railway.app",
+        process.env.envi === "production"
+          ? process.env.NUXT_PUBLIC_BACKEND_BASE_URL
+          : "http://localhost:4000",
       siteUrl:
-        process.env.NUXT_PUBLIC_SITE_URL ||
-        "https://big-project-production-01f5.up.railway.app",
+        process.env.envi === "production"
+          ? process.env.NUXT_PUBLIC_BACKEND_BASE_URL
+          : "http://localhost:3000",
       otpSend: false,
     },
   },

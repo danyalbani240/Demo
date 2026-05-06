@@ -103,8 +103,11 @@ const { toggleDarkMode } = useDarkMode();
 
 const { locale, locales, setLocale, loadLocaleMessages } = useI18n();
 async function switchLang(code: "fa" | "en" | "ku") {
+  const loader = useLoader();
+  loader.show();
   await loadLocaleMessages(code); // forces fetch of messages
   await setLocale(code);
+  loader.hide();
 }
 
 const items = computed(() =>

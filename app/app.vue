@@ -1,17 +1,16 @@
 <template>
+  <BaseLoading />
   <UApp>
     <NuxtLayout />
-
   </UApp>
-  
 </template>
 <script setup>
 import { useDarkMode } from "~/composables/useDarkMode";
-const { locale, localeProperties } = useI18n()
+const { locale, localeProperties } = useI18n();
 useHead(() => ({
   htmlAttrs: {
     lang: locale.value,
-    dir: localeProperties.value.dir || 'rtl'
+    dir: localeProperties.value.dir || "rtl",
   },
   meta: [
     { name: "theme-color", content: "#10b981" },
