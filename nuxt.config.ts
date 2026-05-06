@@ -1,10 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  // routeRules: {
-  //   // "/auth": { ssr: false },
-  //   "/dashboard/**": { ssr: false },
-  // },
+  routeRules: {
+    // "/auth": { ssr: false },
+    "/dashboard/**": { ssr: false },
+    "/": { prerender: true },
+    // Products page generated on demand, revalidates in background, cached until API response changes
+    "/search": { swr: true },
+    // Product pages generated on demand, revalidates in background, cached for 1 hour (3600 seconds)
+    "/providers/profile/**": { swr: 3600 },
+  },
   // devtools: {
   //   enabled: process.env.NODE_ENV !== "production",
 
@@ -39,7 +44,7 @@ export default defineNuxtConfig({
         ],
         lazy: true,
         langDir: "locales",
-        defaultLocale: "Ku",
+        defaultLocale: "ku",
         strategy: "no_prefix",
         detectBrowserLanguage: {
           useCookie: true,
