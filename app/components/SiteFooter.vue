@@ -1,6 +1,6 @@
 <template>
   <footer
-    :dir="$i18n.locale === 'en' ? 'ltr' : 'rtl'"
+    
     class="bg-white dark:bg-slate-900/50 border-t border-gray-200 dark:border-slate-800 mt-10 transition-colors duration-300"
   >
     <UContainer class="py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">

@@ -1,6 +1,6 @@
 <template>
   <!-- Root: Persian RTL Landing Page for ServiceHub -->
-  <div dir="rtl">
+  <div>
     <!-- Hero -->
     <HomeHero
       :categories="categories"

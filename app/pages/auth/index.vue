@@ -1,8 +1,5 @@
 <template>
-  <div
-    dir="rtl"
-    class="relative min-h-[100dvh] overflow-hidden isolate dark:bg-zinc-950"
-  >
+  <div class="relative min-h-[100dvh] overflow-hidden isolate dark:bg-zinc-950">
     <!-- background (Tailwind theme-aware) -->
     <div
       class="auth-bg absolute inset-0 -z-10 dark:!bg-zinc-950"
@@ -285,9 +282,14 @@
                 موافقت می‌کنید.
               </p>
 
-              <p class="text-center text-[11px] text-zinc-600 dark:text-zinc-300/80">
+              <p
+                class="text-center text-[11px] text-zinc-600 dark:text-zinc-300/80"
+              >
                 رمز عبور را فراموش کرده‌اید؟
-                <NuxtLink to="/auth/forgot-password" class="font-black text-primary-700 dark:text-primary-300">
+                <NuxtLink
+                  to="/auth/forgot-password"
+                  class="font-black text-primary-700 dark:text-primary-300"
+                >
                   بازیابی رمز
                 </NuxtLink>
               </p>
@@ -466,7 +468,7 @@ function loadPref() {
   } catch {}
 }
 
-function pulseError(message?: string) { 
+function pulseError(message?: string) {
   shake.value = true;
   setTimeout(() => (shake.value = false), 450);
   if (message)
@@ -597,7 +599,9 @@ async function submit() {
     });
 
     successText.value =
-      role.value === "provider" ? "ثبت‌نام موفق! بریم داشبورد 🚀" : "ثبت‌نام موفق ✨";
+      role.value === "provider"
+        ? "ثبت‌نام موفق! بریم داشبورد 🚀"
+        : "ثبت‌نام موفق ✨";
 
     await showSuccessThenGo(computeNext(authStore.next || "/dashboard"));
   } catch {

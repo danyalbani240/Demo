@@ -1,6 +1,5 @@
 <template>
   <div
-    :dir="$i18n.locale === 'en' ? 'ltr' : 'rtl'"
     class="relative min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 text-gray-900 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 dark:text-slate-50"
   >
     <div

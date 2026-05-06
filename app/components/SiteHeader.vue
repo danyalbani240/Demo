@@ -1,6 +1,5 @@
 <template>
   <header
-    :dir="$i18n.locale === 'en' ? 'ltr' : 'rtl'"
     class="bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-40 transition-colors duration-300"
   >
     <UContainer class="flex items-center justify-between h-16">

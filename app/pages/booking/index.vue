@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
   >
     <UContainer class="pb-24 pt-3 sm:pt-6">

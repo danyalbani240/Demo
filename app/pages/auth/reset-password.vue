@@ -1,16 +1,23 @@
 <template>
   <div
-    dir="rtl"
     class="relative min-h-[100dvh] overflow-hidden bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-zinc-50"
   >
     <!-- soft background -->
     <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-      <div class="absolute -top-32 -left-32 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl" />
-      <div class="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl" />
-      <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-black/5 to-transparent dark:from-white/5" />
+      <div
+        class="absolute -top-32 -left-32 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"
+      />
+      <div
+        class="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl"
+      />
+      <div
+        class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-black/5 to-transparent dark:from-white/5"
+      />
     </div>
 
-    <div class="relative z-10 flex min-h-[100dvh] items-center justify-center px-4 py-8">
+    <div
+      class="relative z-10 flex min-h-[100dvh] items-center justify-center px-4 py-8"
+    >
       <UCard
         class="w-full max-w-md rounded-[28px] border border-black/10 bg-white/95 p-5 shadow-xl dark:border-white/10 dark:bg-zinc-950/85"
       >
@@ -79,7 +86,11 @@
               :disabled="loading || resendCooldown > 0"
               @click="resend"
             >
-              {{ resendCooldown > 0 ? `ارسال مجدد (${resendCooldown})` : "ارسال مجدد کد" }}
+              {{
+                resendCooldown > 0
+                  ? `ارسال مجدد (${resendCooldown})`
+                  : "ارسال مجدد کد"
+              }}
             </UButton>
 
             <NuxtLink
@@ -104,134 +115,146 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "default" })
+definePageMeta({ layout: "default" });
 
-const toast = useToast()
-const router = useRouter()
-const route = useRoute()
+const toast = useToast();
+const router = useRouter();
+const route = useRoute();
 
 const form = reactive({
   phone: "",
   code: "",
   newPassword: "",
   confirm: "",
-})
+});
 
-const loading = ref(false)
-const errorMsg = ref("")
-const successMsg = ref("")
-const resendCooldown = ref(0)
-let resendTimer: any = null
+const loading = ref(false);
+const errorMsg = ref("");
+const successMsg = ref("");
+const resendCooldown = ref(0);
+let resendTimer: any = null;
 
-const phoneLocked = computed(() => Boolean(route.query.phone))
+const phoneLocked = computed(() => Boolean(route.query.phone));
 
 function normalizePhone(v: string) {
-  return String(v || "").trim()
+  return String(v || "").trim();
 }
 function isValidIranPhone(v: string) {
-  return /^09\d{9}$/.test(normalizePhone(v))
+  return /^09\d{9}$/.test(normalizePhone(v));
 }
 
 onMounted(() => {
-  const qPhone = String(route.query.phone || "").trim()
-  if (qPhone) form.phone = qPhone
-})
+  const qPhone = String(route.query.phone || "").trim();
+  if (qPhone) form.phone = qPhone;
+});
 
 function startCooldown(seconds: number) {
-  resendCooldown.value = Math.max(0, Math.floor(seconds))
-  if (resendTimer) clearInterval(resendTimer)
+  resendCooldown.value = Math.max(0, Math.floor(seconds));
+  if (resendTimer) clearInterval(resendTimer);
   resendTimer = setInterval(() => {
-    resendCooldown.value -= 1
+    resendCooldown.value -= 1;
     if (resendCooldown.value <= 0) {
-      resendCooldown.value = 0
-      clearInterval(resendTimer)
-      resendTimer = null
+      resendCooldown.value = 0;
+      clearInterval(resendTimer);
+      resendTimer = null;
     }
-  }, 1000)
+  }, 1000);
 }
 
 onBeforeUnmount(() => {
-  if (resendTimer) clearInterval(resendTimer)
-})
+  if (resendTimer) clearInterval(resendTimer);
+});
 
 async function resend() {
-  errorMsg.value = ""
-  successMsg.value = ""
-  const p = normalizePhone(form.phone)
+  errorMsg.value = "";
+  successMsg.value = "";
+  const p = normalizePhone(form.phone);
 
   if (!isValidIranPhone(p)) {
-    errorMsg.value = "شماره موبایل معتبر نیست"
-    return
+    errorMsg.value = "شماره موبایل معتبر نیست";
+    return;
   }
 
-  loading.value = true
+  loading.value = true;
   try {
     const res: any = await $fetch("/api/auth/password/forgot", {
       method: "POST",
       body: { phone: p },
-    })
+    });
 
     if (!res?.success) {
-      errorMsg.value = String(res?.message || "ارسال مجدد ناموفق بود")
-      return
+      errorMsg.value = String(res?.message || "ارسال مجدد ناموفق بود");
+      return;
     }
 
-    toast.add({ title: "کد ارسال شد", description: `کد تایید به ${p} ارسال شد.`, color: "success" })
-    startCooldown(30)
+    toast.add({
+      title: "کد ارسال شد",
+      description: `کد تایید به ${p} ارسال شد.`,
+      color: "success",
+    });
+    startCooldown(30);
   } catch (e: any) {
-    errorMsg.value = String(e?.data?.message || e?.statusMessage || "ارسال مجدد ناموفق بود")
+    errorMsg.value = String(
+      e?.data?.message || e?.statusMessage || "ارسال مجدد ناموفق بود",
+    );
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
 async function submit() {
-  errorMsg.value = ""
-  successMsg.value = ""
+  errorMsg.value = "";
+  successMsg.value = "";
 
-  const p = normalizePhone(form.phone)
-  const code = String(form.code || "").trim()
-  const pass = String(form.newPassword || "")
-  const confirm = String(form.confirm || "")
+  const p = normalizePhone(form.phone);
+  const code = String(form.code || "").trim();
+  const pass = String(form.newPassword || "");
+  const confirm = String(form.confirm || "");
 
   if (!isValidIranPhone(p)) {
-    errorMsg.value = "شماره موبایل معتبر نیست"
-    return
+    errorMsg.value = "شماره موبایل معتبر نیست";
+    return;
   }
   if (!code) {
-    errorMsg.value = "کد تایید الزامی است"
-    return
+    errorMsg.value = "کد تایید الزامی است";
+    return;
   }
   if (pass.length < 6) {
-    errorMsg.value = "رمز عبور باید حداقل ۶ کاراکتر باشد"
-    return
+    errorMsg.value = "رمز عبور باید حداقل ۶ کاراکتر باشد";
+    return;
   }
   if (pass !== confirm) {
-    errorMsg.value = "تکرار رمز عبور با رمز جدید یکسان نیست"
-    return
+    errorMsg.value = "تکرار رمز عبور با رمز جدید یکسان نیست";
+    return;
   }
 
-  loading.value = true
+  loading.value = true;
   try {
     const res: any = await $fetch("/api/auth/password/reset", {
       method: "POST",
       body: { phone: p, code, new_password: pass },
-    })
+    });
 
     if (!res?.success) {
-      errorMsg.value = String(res?.message || "تغییر رمز ناموفق بود")
-      return
+      errorMsg.value = String(res?.message || "تغییر رمز ناموفق بود");
+      return;
     }
 
-    successMsg.value = "رمز عبور با موفقیت تغییر کرد."
-    toast.add({ title: "انجام شد", description: "اکنون می‌توانید وارد شوید.", color: "success" })
+    successMsg.value = "رمز عبور با موفقیت تغییر کرد.";
+    toast.add({
+      title: "انجام شد",
+      description: "اکنون می‌توانید وارد شوید.",
+      color: "success",
+    });
 
-    await new Promise((r) => setTimeout(r, 600))
-    await router.push("/auth")
+    await new Promise((r) => setTimeout(r, 600));
+    await router.push("/auth");
   } catch (e: any) {
-    errorMsg.value = String(e?.data?.message || e?.statusMessage || "تغییر رمز ناموفق بود")
+    errorMsg.value = String(
+      e?.data?.message || e?.statusMessage || "تغییر رمز ناموفق بود",
+    );
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>

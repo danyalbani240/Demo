@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-50"
   >
     <UContainer class="py-6">

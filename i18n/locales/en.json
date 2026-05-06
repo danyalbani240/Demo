@@ -317,5 +317,391 @@
   "newsletter": {
     "invalidEmail": "Invalid email address",
     "success": "Subscription successful"
+  },
+  "common": {
+    "comingSoon": "Coming soon",
+    "close": "Close",
+    "clear": "Clear"
+  },
+  "contact": {
+    "form": {
+      "title": "Contact Form",
+      "description": "Please enter your information accurately so we can respond faster.",
+      "name": "Full Name *",
+      "email": "Email *",
+      "phone": "Mobile (optional)",
+      "topic": "Message Topic *",
+      "message": "Your Message *",
+      "agree": "I have read and agree to the terms and privacy policy.",
+      "submit": "Send Message",
+      "charLimit": "Minimum {min} and maximum {max} characters",
+      "footer": "By sending this message, you agree that your contact information may be used to follow up."
+    },
+    "status": {
+      "sent": "Sent",
+      "sending": "Sending...",
+      "ready": "Ready to send"
+    },
+    "success": {
+      "title": "Your message was received ✅",
+      "description": "It was sent successfully. If follow-up is needed, we will reply to this email.",
+      "alert": "Your message was sent successfully."
+    },
+    "info": {
+      "title": "Contact Information"
+    },
+    "quickChannels": "Quick Contact Channels",
+    "location": {
+      "title": "Exact Location",
+      "openMaps": "Open in Google Maps",
+      "copy": "Copy Coordinates"
+    },
+    "map": {
+      "title": "ServiceHub Map"
+    },
+    "topics": {
+      "booking": "Booking Support",
+      "abuse": "Report Abuse",
+      "feature": "Feature Suggestion",
+      "other": "Other"
+    },
+    "errors": {
+      "invalidSubmission": "Invalid submission.",
+      "nameRequired": "Please enter your name.",
+      "invalidEmail": "Invalid email address.",
+      "topicRequired": "Please select a message topic.",
+      "messageRequired": "Please write your message.",
+      "messageTooShort": "Message is too short (minimum {min} characters).",
+      "messageTooLong": "Message is too long (maximum {max} characters).",
+      "mustAgree": "You must agree to the terms.",
+      "tooFast": "Please wait a moment and try again.",
+      "submitFailed": "Submission failed.",
+      "serverError": "Error sending message. Please try again later."
+    },
+    "toast": {
+      "coordsCopied": "Coordinates copied.",
+      "copyFailed": "Copy failed.",
+      "sent": "Message sent. Thank you!"
+    },
+    "hero": {
+      "title": "Contact Us",
+      "description": "Have a question, suggestion or issue? Your message goes directly to our team.",
+      "and": "and"
+    },
+    "badges": {
+      "fast": "Fast response",
+      "secure": "Secure message",
+      "trackable": "Trackable"
+    },
+    "quick": {
+      "title": "Need it faster?",
+      "email": "Send direct email",
+      "form": "Send message via form",
+      "formDesc": "Right here, quick and organized",
+      "channels": "Quick channels"
+    },
+    "cooldown": {
+      "wait": "To prevent spam please wait {seconds} seconds before sending again."
+    }
+  },
+  "trust": {
+    "ratings": {
+      "steps": {
+        "overall": {
+          "title": "1) Overall rating (out of 5)",
+          "badge": "Quick",
+          "desc": "A single overall score summarizing the experience."
+        },
+        "criteria": {
+          "title": "2) Detailed criteria",
+          "badge": "Precise"
+        },
+        "feedback": {
+          "title": "3) Written feedback",
+          "badge": "Transparent",
+          "desc": "Text reviews explain why a rating was high or low. Offensive or irrelevant content is removed."
+        }
+      },
+      "criteria": {
+        "punctuality": "Punctuality and adherence to booking time",
+        "quality": "Service quality compared to description",
+        "communication": "Professional behavior and communication",
+        "priceTransparency": "Price transparency and extra costs"
+      },
+      "reply": {
+        "title": "Provider reply rights",
+        "desc": "Providers can respond respectfully under a review to clarify issues.",
+        "goalTitle": "Our goal",
+        "goalDesc": "Turn feedback into real improvement, not conflict."
+      },
+      "validFeedback": {
+        "title": "What counts as valid feedback?",
+        "v1": "Related to the specific booking",
+        "v2": "Contains verifiable details",
+        "v3": "Respectful and without sensitive data"
+      },
+      "links": {
+        "refund": "Next: Refund Guarantee",
+        "provider": "Back: Provider Verification"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "q1": "Why are some reviews not displayed?",
+        "a1": "Content containing insults, personal data, ads, or irrelevant material is removed.",
+        "q2": "The rating seems unfair. What should I do?",
+        "a2": "Use the report option so support can review it.",
+        "q3": "Can a rating be edited?",
+        "a3": "It can be edited shortly after submission, then it becomes locked."
+      },
+      "title": "Ratings & Feedback System",
+      "subtitle": "Transparent, real, anti‑fraud",
+
+      "heroText1": "Ratings are only meaningful when they are",
+      "heroHighlight": "real",
+      "heroText2": ". On ServiceHub, reviews are submitted after a service is completed.",
+
+      "badges": {
+        "realBookings": "Real bookings only",
+        "antiFraud": "Anti‑fraud",
+        "replyRight": "Provider reply rights"
+      },
+
+      "principles": {
+        "p1": {
+          "label": "Principle 1",
+          "title": "Ratings after service completion",
+          "desc": "Only users with completed bookings can rate."
+        },
+        "p2": {
+          "label": "Principle 2",
+          "title": "Transparent and clear",
+          "desc": "Overall score plus detailed metrics."
+        },
+        "p3": {
+          "label": "Principle 3",
+          "title": "Fraud review handling",
+          "desc": "Suspicious feedback is investigated and removed if proven."
+        }
+      },
+
+      "how": {
+        "title": "How ratings work",
+        "description": "A simple but accurate model for fair evaluation."
+      }
+    },
+    "common": {
+      "section": "Trust & Transparency",
+      "contactSupport": "Contact Support"
+    },
+
+    "navigation": {
+      "backRatings": "Back: Ratings & Feedback",
+      "backVerification": "Back: Provider Verification"
+    },
+
+    "provider": {
+      "title": "Provider Verification",
+      "subtitle": "Process and criteria"
+    },
+
+    "refund": {
+      "title": "Refund Guarantee",
+      "subtitle": "Rules and timeline",
+
+      "heroDescription": "If the service is not delivered as agreed or a serious issue occurs, we have a defined process for review and potential refund.",
+
+      "badges": {
+        "transparent": "Transparent process",
+        "review": "Requires review",
+        "secure": "Secure payment"
+      },
+
+      "principle": {
+        "label": "Core Principle",
+        "title": "Resolve the issue first; refund if unresolved",
+        "description": "We first attempt to resolve the issue through fair communication. If not possible, the refund process begins."
+      },
+
+      "conditions": {
+        "title": "When refunds apply",
+        "description": "To prevent abuse, refunds are issued only under verifiable conditions.",
+
+        "c1": {
+          "title": "Service not delivered",
+          "desc": "If the provider does not show up or the service is not performed."
+        },
+
+        "c2": {
+          "title": "Major mismatch with description",
+          "desc": "If the delivered service clearly differs from what was described."
+        },
+
+        "c3": {
+          "title": "Unagreed extra charges",
+          "desc": "If additional fees are requested without clear agreement."
+        }
+      },
+
+      "exclusions": {
+        "title": "When refunds do not apply",
+        "e1": "Subjective preference changes",
+        "e2": "Requests outside the booked service",
+        "e3": "Failure to provide required evidence"
+      },
+
+      "fairness": {
+        "title": "Fairness",
+        "description": "The goal is fairness for both users and providers."
+      },
+
+      "steps": {
+        "title": "Refund request steps",
+        "description": "Designed to be quick and trackable.",
+
+        "s1": {
+          "label": "Step 1",
+          "title": "Submit a report",
+          "desc": "Describe the issue clearly and attach evidence if possible."
+        },
+
+        "s2": {
+          "label": "Step 2",
+          "title": "Review and resolution attempt",
+          "desc": "Support coordinates with both sides to try resolving the issue."
+        },
+
+        "s3": {
+          "label": "Step 3",
+          "title": "Refund if approved",
+          "desc": "Refund will be processed via the payment method or wallet."
+        }
+      },
+
+      "faq": {
+        "title": "Frequently Asked Questions",
+
+        "q1": "How long does it take?",
+        "a1": "Timing depends on the issue and review process but we aim for fast resolution.",
+
+        "q2": "How is the refund processed?",
+        "a2": "Refunds may be issued to your wallet or original payment method.",
+
+        "q3": "What if the provider does not cooperate?",
+        "a3": "Decisions are made based on booking records and evidence."
+      }
+    }
+  },
+  "trustProviderVerification": {
+    "timeline": [
+      {
+        "title": "Submit Basic Information",
+        "desc": "Name, city or service area, skills and contact information that users should clearly see."
+      },
+      {
+        "title": "Identity and Account Ownership Verification",
+        "desc": "Ensuring the account belongs to a real person and can be held accountable."
+      },
+      {
+        "title": "Service and Pricing Validation",
+        "desc": "Services, pricing ranges and job conditions are reviewed to prevent unrealistic promises."
+      },
+      {
+        "title": "Trust Badge Activation",
+        "desc": "After approval, badges such as “Verified Identity” or “Complete Profile” appear on the profile."
+      },
+      {
+        "title": "Ongoing Monitoring and Reports",
+        "desc": "Ratings, feedback, reports and cancellation rates are reviewed to maintain quality."
+      }
+    ],
+
+    "guarantee": {
+      "title": "What do we guarantee?",
+      "badge": "Transparency",
+      "items": [
+        "Clear display of city, skills and service area",
+        "Understandable pricing (ranges and details)",
+        "Ability to report issues with fast follow‑up"
+      ]
+    },
+
+    "privacy": {
+      "title": "We respect privacy",
+      "desc": "Sensitive information is only used for verification and is never displayed on the public profile.",
+      "noteTitle": "Important note",
+      "noteDesc": "A trust badge confirms identity or profile verification, not a 100% guarantee of work results. That’s why rating and refund systems also exist."
+    },
+
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": [
+        {
+          "q": "Are all providers verified?",
+          "a": "Every provider must pass the basic verification steps. Some also earn additional badges like complete profile or verified portfolio."
+        },
+        {
+          "q": "What if I encounter a problem?",
+          "a": "From the booking or provider profile choose “Report a problem”. Support will review the case and may activate the refund process."
+        },
+        {
+          "q": "Why are some details not public?",
+          "a": "For security and privacy. Sensitive data is used only for verification."
+        }
+      ]
+    },
+
+    "links": {
+      "rating": "Continue: Ratings & Feedback",
+      "refund": "Continue: Refund Guarantee"
+    },
+    "breadcrumb": {
+      "trust": "Trust & Transparency",
+      "page": "Provider Verification"
+    },
+
+    "hero": {
+      "title": "Provider Verification on ServiceHub",
+      "desc1": "To ensure your booking is safe, we use a multi‑step process to verify service providers. The result is simple:",
+      "highlight": "transparency, accountability, and reduced risk"
+    },
+
+    "badges": {
+      "identity": "Identity Verification",
+      "skill": "Skill Verification",
+      "quality": "Quality Monitoring"
+    },
+
+    "quick": {
+      "title": "Trust & Transparency",
+      "verifyTitle": "Provider Verification",
+      "verifyDesc": "Steps and criteria",
+      "ratingTitle": "Ratings & Feedback",
+      "ratingDesc": "Transparent, real, anti‑fraud",
+      "refundTitle": "Refund Guarantee",
+      "refundDesc": "Rules and timing"
+    },
+
+    "steps": [
+      {
+        "stage": "Step 1",
+        "title": "Identity Information Verification",
+        "desc": "Phone number, basic details, and account ownership verification to prevent fake accounts."
+      },
+      {
+        "stage": "Step 2",
+        "title": "Skill and Portfolio Verification",
+        "desc": "Work history, portfolios, services offered, and transparent pricing are reviewed."
+      },
+      {
+        "stage": "Step 3",
+        "title": "Continuous Quality Monitoring",
+        "desc": "Ratings, complaints, cancellations and professional behavior are periodically evaluated."
+      }
+    ],
+
+    "process": {
+      "title": "How does the verification process work?",
+      "subtitle": "Step‑by‑step, trackable, and with minimal friction for providers."
+    }
   }
 }

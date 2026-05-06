@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-[100dvh] bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 flex items-center justify-center p-4"
   >
     <div

@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="bg-gray-50 min-h-screen text-gray-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300"
   >
     <UContainer class="py-8 animate-slide-up">

@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-50"
   >
     <UContainer class="py-8 sm:py-10">
@@ -14,11 +13,11 @@
           >{{ $t("search.home") }}</NuxtLink
         >
         <span class="opacity-70">/</span>
-        <span class="opacity-90">اعتماد و شفافیت</span>
+        <span class="opacity-90">{{ $t("trust.common.section") }}</span>
         <span class="opacity-70">/</span>
-        <span class="text-gray-700 dark:text-slate-200"
-          >گارانتی بازگشت وجه</span
-        >
+        <span class="text-gray-700 dark:text-slate-200">{{
+          $t("trust.refund.title")
+        }}</span>
       </nav>
 
       <!-- Hero -->
@@ -33,15 +32,12 @@
               <h1
                 class="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight"
               >
-                گارانتی بازگشت وجه
+                {{ $t("trust.refund.title") }}
               </h1>
               <p
                 class="mt-2 text-sm sm:text-base text-gray-600 dark:text-slate-300 leading-7"
               >
-                اگر سرویس مطابق توافق انجام نشد یا مشکل جدی رخ داد، سازوکار
-                مشخصی برای رسیدگی و در صورت نیاز بازگشت وجه داریم. این سیاست
-                برای محافظت از کاربر و ایجاد استاندارد حرفه‌ای برای متخصص طراحی
-                شده.
+                {{ $t("trust.refund.heroDescription") }}
               </p>
 
               <div class="mt-5 flex flex-wrap gap-2">
@@ -49,19 +45,19 @@
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-                  شفاف و مرحله‌ای
+                  {{ $t("trust.refund.badges.transparent") }}
                 </span>
                 <span
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-amber-500"></span>
-                  نیازمند بررسی
+                  {{ $t("trust.refund.badges.review") }}
                 </span>
                 <span
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-blue-500"></span>
-                  پرداخت امن
+                  {{ $t("trust.refund.badges.secure") }}
                 </span>
               </div>
             </div>
@@ -72,15 +68,19 @@
                 class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-slate-950/40 p-4"
               >
                 <p class="text-xs text-gray-500 dark:text-slate-400">
-                  اعتماد و شفافیت
+                  {{ $t("trust.common.section") }}
                 </p>
                 <div class="mt-3 grid grid-cols-1 gap-2">
                   <NuxtLink
                     to="/trust/provider-verification"
                     class="rounded-xl px-3 py-3 border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
                   >
-                    <div class="text-sm font-bold">احراز هویت متخصصان</div>
-                    <div class="text-xs opacity-80 mt-1">مراحل و معیارها</div>
+                    <div class="text-sm font-bold">
+                      {{ $t("trust.provider.title") }}
+                    </div>
+                    <div class="text-xs opacity-80 mt-1">
+                      {{ $t("trust.provider.subtitle") }}
+                    </div>
                   </NuxtLink>
 
                   <NuxtLink
@@ -88,10 +88,10 @@
                     class="rounded-xl px-3 py-3 border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
                   >
                     <div class="text-sm font-bold">
-                      سیستم امتیازدهی و بازخورد
+                      {{ $t("trust.ratings.title") }}
                     </div>
                     <div class="text-xs opacity-80 mt-1">
-                      شفاف، واقعی، ضدتقلب
+                      {{ $t("trust.ratings.subtitle") }}
                     </div>
                   </NuxtLink>
 
@@ -99,8 +99,12 @@
                     to="/trust/refund-guarantee"
                     class="rounded-xl px-3 py-3 border border-primary-200/70 dark:border-primary-400/30 bg-primary-50 dark:bg-primary-500/10 text-primary-700 dark:text-primary-200"
                   >
-                    <div class="text-sm font-bold">گارانتی بازگشت وجه</div>
-                    <div class="text-xs opacity-80 mt-1">قواعد و زمان‌بندی</div>
+                    <div class="text-sm font-bold">
+                      {{ $t("trust.refund.title") }}
+                    </div>
+                    <div class="text-xs opacity-80 mt-1">
+                      {{ $t("trust.refund.subtitle") }}
+                    </div>
                   </NuxtLink>
                 </div>
               </div>
@@ -116,23 +120,22 @@
             >
               <div>
                 <div class="text-sm text-gray-600 dark:text-slate-300">
-                  اصل مهم
+                  {{ $t("trust.refund.principle.label") }}
                 </div>
                 <div class="mt-1 text-base sm:text-lg font-black">
-                  اول تلاش برای حل مسئله؛ در صورت عدم حل، بازگشت وجه
+                  {{ $t("trust.refund.principle.title") }}
                 </div>
                 <p
                   class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
                 >
-                  ما اول تلاش می‌کنیم مشکل با گفت‌وگوی منصفانه و شفاف حل شود.
-                  اگر نشد، مسیر بازگشت وجه فعال می‌شود.
+                  {{ $t("trust.refund.principle.description") }}
                 </p>
               </div>
               <NuxtLink
                 to="/support"
                 class="inline-flex items-center justify-center rounded-2xl px-4 py-3 font-bold border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
               >
-                ارتباط با پشتیبانی
+                {{ $t("trust.common.contactSupport") }}
               </NuxtLink>
             </div>
           </div>
@@ -145,46 +148,49 @@
           class="lg:col-span-7 rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
         >
           <h2 class="text-lg sm:text-xl font-black">
-            چه زمانی بازگشت وجه شامل می‌شود؟
+            {{ $t("trust.refund.conditions.title") }}
           </h2>
           <p class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6">
-            برای جلوگیری از سوءاستفاده، بازگشت وجه فقط در شرایط مشخص و قابل
-            بررسی انجام می‌شود.
+            {{ $t("trust.refund.conditions.description") }}
           </p>
 
           <div class="mt-5 space-y-3">
             <div
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="font-extrabold">۱) انجام نشدن سرویس</div>
+              <div class="font-extrabold">
+                {{ $t("trust.refund.conditions.c1.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                اگر متخصص در زمان رزرو حاضر نشود یا سرویس عملاً انجام نشود.
+                {{ $t("trust.refund.conditions.c1.desc") }}
               </p>
             </div>
 
             <div
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="font-extrabold">۲) مغایرت جدی با توضیحات</div>
+              <div class="font-extrabold">
+                {{ $t("trust.refund.conditions.c2.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                اگر سرویس ارائه‌شده به شکل واضح با توضیحات ثبت‌شده تفاوت داشته
-                باشد (مثلاً کیفیت/محدوده سرویس).
+                {{ $t("trust.refund.conditions.c2.desc") }}
               </p>
             </div>
 
             <div
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="font-extrabold">۳) هزینه‌های خارج از توافق</div>
+              <div class="font-extrabold">
+                {{ $t("trust.refund.conditions.c3.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                در صورتی که هزینه‌ی اضافی بدون توافق و شفافیت مطالبه شود و قابل
-                اثبات باشد.
+                {{ $t("trust.refund.conditions.c3.desc") }}
               </p>
             </div>
           </div>
@@ -194,33 +200,36 @@
           <div
             class="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
           >
-            <h3 class="font-black">چه زمانی شامل نمی‌شود؟</h3>
+            <h3 class="font-black">
+              {{ $t("trust.refund.exclusions.title") }}
+            </h3>
             <ul
               class="mt-3 space-y-2 text-sm text-gray-700 dark:text-slate-200"
             >
               <li class="flex gap-2">
                 <span class="mt-2 h-1.5 w-1.5 rounded-full bg-rose-500"></span>
-                تغییر نظر سلیقه‌ای بدون اشکال قابل بررسی
+                {{ $t("trust.refund.exclusions.e1") }}
               </li>
               <li class="flex gap-2">
                 <span class="mt-2 h-1.5 w-1.5 rounded-full bg-rose-500"></span>
-                درخواست خارج از سرویس ثبت‌شده
+                {{ $t("trust.refund.exclusions.e2") }}
               </li>
               <li class="flex gap-2">
                 <span class="mt-2 h-1.5 w-1.5 rounded-full bg-rose-500"></span>
-                عدم همکاری برای ارائه مدارک/توضیحات لازم
+                {{ $t("trust.refund.exclusions.e3") }}
               </li>
             </ul>
 
             <div
               class="mt-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="text-sm font-bold">شفافیت</div>
+              <div class="text-sm font-bold">
+                {{ $t("trust.refund.fairness.title") }}
+              </div>
               <p
                 class="mt-1 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                هدف این بخش «نه سخت‌گیری»، بلکه «منصفانه بودن» برای هر دو طرف
-                است.
+                {{ $t("trust.refund.fairness.description") }}
               </p>
             </div>
           </div>
@@ -233,11 +242,10 @@
           class="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
         >
           <h2 class="text-lg sm:text-xl font-black">
-            مراحل درخواست بازگشت وجه
+            {{ $t("trust.refund.steps.title") }}
           </h2>
           <p class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6">
-            این مسیر را طوری طراحی کرده‌ایم که سریع، قابل پیگیری و با حداقل
-            رفت‌وبرگشت باشد.
+            {{ $t("trust.refund.steps.description") }}
           </p>
 
           <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -245,13 +253,15 @@
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
               <div class="text-xs text-gray-500 dark:text-slate-400">
-                مرحله ۱
+                {{ $t("trust.refund.steps.s1.label") }}
               </div>
-              <div class="mt-1 font-extrabold">ثبت گزارش از داخل رزرو</div>
+              <div class="mt-1 font-extrabold">
+                {{ $t("trust.refund.steps.s1.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                مشکل را دقیق بنویسید و در صورت امکان عکس/مدرک اضافه کنید.
+                {{ $t("trust.refund.steps.s1.desc") }}
               </p>
             </div>
 
@@ -259,14 +269,15 @@
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
               <div class="text-xs text-gray-500 dark:text-slate-400">
-                مرحله ۲
+                {{ $t("trust.refund.steps.s2.label") }}
               </div>
-              <div class="mt-1 font-extrabold">بررسی و تلاش برای حل</div>
+              <div class="mt-1 font-extrabold">
+                {{ $t("trust.refund.steps.s2.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                تیم پشتیبانی با طرفین هماهنگ می‌کند تا اگر امکان حل هست، سریع
-                انجام شود.
+                {{ $t("trust.refund.steps.s2.desc") }}
               </p>
             </div>
 
@@ -274,13 +285,15 @@
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
               <div class="text-xs text-gray-500 dark:text-slate-400">
-                مرحله ۳
+                {{ $t("trust.refund.steps.s3.label") }}
               </div>
-              <div class="mt-1 font-extrabold">بازگشت وجه (در صورت تایید)</div>
+              <div class="mt-1 font-extrabold">
+                {{ $t("trust.refund.steps.s3.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                در صورت تایید، بازگشت وجه طبق روش پرداخت/کیف پول انجام می‌شود.
+                {{ $t("trust.refund.steps.s3.desc") }}
               </p>
             </div>
           </div>
@@ -290,13 +303,13 @@
               to="/trust/ratings-feedback"
               class="inline-flex items-center justify-center rounded-2xl px-4 py-3 font-bold border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
             >
-              بازگشت: امتیازدهی و بازخورد
+              {{ $t("trust.navigation.backRatings") }}
             </NuxtLink>
             <NuxtLink
               to="/trust/provider-verification"
               class="inline-flex items-center justify-center rounded-2xl px-4 py-3 font-bold border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
             >
-              بازگشت: احراز هویت متخصصان
+              {{ $t("trust.navigation.backVerification") }}
             </NuxtLink>
           </div>
         </div>
@@ -307,7 +320,9 @@
         <div
           class="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
         >
-          <h2 class="text-lg sm:text-xl font-black">سوالات پرتکرار</h2>
+          <h2 class="text-lg sm:text-xl font-black">
+            {{ $t("trust.refund.faq.title") }}
+          </h2>
 
           <div class="mt-4 space-y-3">
             <details
@@ -316,9 +331,9 @@
               <summary
                 class="cursor-pointer list-none flex items-center justify-between gap-3"
               >
-                <span class="font-bold text-sm sm:text-base"
-                  >چقدر طول می‌کشد؟</span
-                >
+                <span class="font-bold text-sm sm:text-base">
+                  {{ $t("trust.refund.faq.q1") }}
+                </span>
                 <span
                   class="text-xs text-gray-500 dark:text-slate-400 group-open:rotate-180 transition"
                   >⌄</span
@@ -327,8 +342,7 @@
               <p
                 class="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                بسته به نوع مشکل و نیاز به بررسی، زمان متفاوت است. هدف ما رسیدگی
-                سریع و مرحله‌ای است و وضعیت رسیدگی قابل پیگیری خواهد بود.
+                {{ $t("trust.refund.faq.a1") }}
               </p>
             </details>
 
@@ -338,9 +352,9 @@
               <summary
                 class="cursor-pointer list-none flex items-center justify-between gap-3"
               >
-                <span class="font-bold text-sm sm:text-base"
-                  >بازگشت وجه به چه روشی انجام می‌شود؟</span
-                >
+                <span class="font-bold text-sm sm:text-base">
+                  {{ $t("trust.refund.faq.q2") }}
+                </span>
                 <span
                   class="text-xs text-gray-500 dark:text-slate-400 group-open:rotate-180 transition"
                   >⌄</span
@@ -349,8 +363,7 @@
               <p
                 class="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                بسته به روش پرداخت شما، بازگشت وجه می‌تواند به کیف پول سرویس‌هاب
-                یا به روش پرداخت قبلی انجام شود.
+                {{ $t("trust.refund.faq.a2") }}
               </p>
             </details>
 
@@ -360,9 +373,9 @@
               <summary
                 class="cursor-pointer list-none flex items-center justify-between gap-3"
               >
-                <span class="font-bold text-sm sm:text-base"
-                  >اگر متخصص همکاری نکند چه می‌شود؟</span
-                >
+                <span class="font-bold text-sm sm:text-base">
+                  {{ $t("trust.refund.faq.q3") }}
+                </span>
                 <span
                   class="text-xs text-gray-500 dark:text-slate-400 group-open:rotate-180 transition"
                   >⌄</span
@@ -371,8 +384,7 @@
               <p
                 class="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                بررسی بر اساس شواهد و اطلاعات رزرو انجام می‌شود. در صورت تایید
-                مشکل، تصمیم نهایی مستقل از همکاری متخصص خواهد بود.
+                {{ $t("trust.refund.faq.a3") }}
               </p>
             </details>
           </div>

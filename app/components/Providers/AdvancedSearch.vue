@@ -131,7 +131,6 @@
     <UModal v-model:open="advancedOpen">
       <template #body>
         <div
-          dir="rtl"
           class="border border-slate-200/70 bg-white/95 p-4 shadow-2xl backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/90 rounded-t-3xl sm:rounded-3xl"
         >
           <div class="flex items-center justify-between">

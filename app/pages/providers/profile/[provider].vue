@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300"
   >
     <!-- HERO -->

@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-50"
   >
     <UContainer class="py-8 sm:py-10">
@@ -14,11 +13,11 @@
           >{{ $t("search.home") }}</NuxtLink
         >
         <span class="opacity-70">/</span>
-        <span class="opacity-90">اعتماد و شفافیت</span>
+        <span class="opacity-90">{{ $t("trust.common.section") }}</span>
         <span class="opacity-70">/</span>
-        <span class="text-gray-700 dark:text-slate-200"
-          >سیستم امتیازدهی و بازخورد</span
-        >
+        <span class="text-gray-700 dark:text-slate-200">
+          {{ $t("trust.ratings.title") }}
+        </span>
       </nav>
 
       <!-- Hero -->
@@ -33,15 +32,17 @@
               <h1
                 class="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight"
               >
-                سیستم امتیازدهی و بازخورد
+                {{ $t("trust.ratings.title") }}
               </h1>
+
               <p
                 class="mt-2 text-sm sm:text-base text-gray-600 dark:text-slate-300 leading-7"
               >
-                امتیازها فقط وقتی معتبرند که
-                <span class="font-semibold">واقعی</span> باشند. در سرویس‌هاب،
-                ثبت امتیاز بعد از انجام سرویس انجام می‌شود تا هم کاربر محافظت
-                شود و هم متخصص‌ها منصفانه ارزیابی شوند.
+                {{ $t("trust.ratings.heroText1") }}
+                <span class="font-semibold">{{
+                  $t("trust.ratings.heroHighlight")
+                }}</span>
+                {{ $t("trust.ratings.heroText2") }}
               </p>
 
               <div class="mt-5 flex flex-wrap gap-2">
@@ -49,19 +50,21 @@
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-                  فقط رزروهای واقعی
+                  {{ $t("trust.ratings.badges.realBookings") }}
                 </span>
+
                 <span
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-blue-500"></span>
-                  ضدتقلب
+                  {{ $t("trust.ratings.badges.antiFraud") }}
                 </span>
+
                 <span
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-amber-500"></span>
-                  حق پاسخ برای متخصص
+                  {{ $t("trust.ratings.badges.replyRight") }}
                 </span>
               </div>
             </div>
@@ -72,15 +75,20 @@
                 class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-slate-950/40 p-4"
               >
                 <p class="text-xs text-gray-500 dark:text-slate-400">
-                  اعتماد و شفافیت
+                  {{ $t("trust.common.section") }}
                 </p>
+
                 <div class="mt-3 grid grid-cols-1 gap-2">
                   <NuxtLink
                     to="/trust/provider-verification"
                     class="rounded-xl px-3 py-3 border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
                   >
-                    <div class="text-sm font-bold">احراز هویت متخصصان</div>
-                    <div class="text-xs opacity-80 mt-1">مراحل و معیارها</div>
+                    <div class="text-sm font-bold">
+                      {{ $t("trust.provider.title") }}
+                    </div>
+                    <div class="text-xs opacity-80 mt-1">
+                      {{ $t("trust.provider.subtitle") }}
+                    </div>
                   </NuxtLink>
 
                   <NuxtLink
@@ -88,10 +96,10 @@
                     class="rounded-xl px-3 py-3 border border-primary-200/70 dark:border-primary-400/30 bg-primary-50 dark:bg-primary-500/10 text-primary-700 dark:text-primary-200"
                   >
                     <div class="text-sm font-bold">
-                      سیستم امتیازدهی و بازخورد
+                      {{ $t("trust.ratings.title") }}
                     </div>
                     <div class="text-xs opacity-80 mt-1">
-                      شفاف، واقعی، ضدتقلب
+                      {{ $t("trust.ratings.subtitle") }}
                     </div>
                   </NuxtLink>
 
@@ -99,8 +107,12 @@
                     to="/trust/refund-guarantee"
                     class="rounded-xl px-3 py-3 border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
                   >
-                    <div class="text-sm font-bold">گارانتی بازگشت وجه</div>
-                    <div class="text-xs opacity-80 mt-1">قواعد و زمان‌بندی</div>
+                    <div class="text-sm font-bold">
+                      {{ $t("trust.refund.title") }}
+                    </div>
+                    <div class="text-xs opacity-80 mt-1">
+                      {{ $t("trust.refund.subtitle") }}
+                    </div>
                   </NuxtLink>
                 </div>
               </div>
@@ -112,38 +124,48 @@
             <div
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-4"
             >
-              <div class="text-xs text-gray-500 dark:text-slate-400">اصل ۱</div>
+              <div class="text-xs text-gray-500 dark:text-slate-400">
+                {{ $t("trust.ratings.principles.p1.label") }}
+              </div>
               <div class="mt-1 font-extrabold">
-                امتیاز فقط بعد از انجام سرویس
+                {{ $t("trust.ratings.principles.p1.title") }}
               </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                تنها کاربرانی می‌توانند امتیاز دهند که رزروشان «تکمیل شده» باشد.
+                {{ $t("trust.ratings.principles.p1.desc") }}
               </p>
             </div>
+
             <div
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-4"
             >
-              <div class="text-xs text-gray-500 dark:text-slate-400">اصل ۲</div>
-              <div class="mt-1 font-extrabold">شفاف + قابل فهم</div>
+              <div class="text-xs text-gray-500 dark:text-slate-400">
+                {{ $t("trust.ratings.principles.p2.label") }}
+              </div>
+              <div class="mt-1 font-extrabold">
+                {{ $t("trust.ratings.principles.p2.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                امتیاز کلی در کنار جزئیات (وقت‌شناسی، برخورد، کیفیت) نمایش داده
-                می‌شود.
+                {{ $t("trust.ratings.principles.p2.desc") }}
               </p>
             </div>
+
             <div
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-4"
             >
-              <div class="text-xs text-gray-500 dark:text-slate-400">اصل ۳</div>
-              <div class="mt-1 font-extrabold">رسیدگی به گزارش تقلب</div>
+              <div class="text-xs text-gray-500 dark:text-slate-400">
+                {{ $t("trust.ratings.principles.p3.label") }}
+              </div>
+              <div class="mt-1 font-extrabold">
+                {{ $t("trust.ratings.principles.p3.title") }}
+              </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                بازخوردهای مشکوک بررسی می‌شوند و در صورت اثبات، از نمایش عمومی
-                حذف می‌شوند.
+                {{ $t("trust.ratings.principles.p3.desc") }}
               </p>
             </div>
           </div>
@@ -156,11 +178,11 @@
           class="lg:col-span-7 rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
         >
           <h2 class="text-lg sm:text-xl font-black">
-            امتیازدهی دقیقاً چگونه انجام می‌شود؟
+            {{ $t("trust.ratings.how.title") }}
           </h2>
+
           <p class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6">
-            ما یک مدل ساده اما دقیق داریم تا کاربر سریع تصمیم بگیرد و متخصص هم
-            منصفانه ارزیابی شود.
+            {{ $t("trust.ratings.how.description") }}
           </p>
 
           <div class="mt-5 space-y-3">
@@ -168,17 +190,19 @@
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
               <div class="flex items-center justify-between gap-3">
-                <div class="font-extrabold">۱) امتیاز کلی (از ۵)</div>
+                <div class="font-extrabold">
+                  {{ $t("trust.ratings.steps.overall.title") }}
+                </div>
                 <span
                   class="text-xs rounded-full px-2 py-1 border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950/40 text-gray-600 dark:text-slate-300"
                 >
-                  سریع
+                  {{ $t("trust.ratings.steps.overall.badge") }}
                 </span>
               </div>
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                یک امتیاز کلی برای جمع‌بندی تجربه.
+                {{ $t("trust.ratings.steps.overall.desc") }}
               </p>
             </div>
 
@@ -186,13 +210,16 @@
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
               <div class="flex items-center justify-between gap-3">
-                <div class="font-extrabold">۲) معیارهای جزئی</div>
+                <div class="font-extrabold">
+                  {{ $t("trust.ratings.steps.criteria.title") }}
+                </div>
                 <span
                   class="text-xs rounded-full px-2 py-1 border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950/40 text-gray-600 dark:text-slate-300"
                 >
-                  دقیق
+                  {{ $t("trust.ratings.steps.criteria.badge") }}
                 </span>
               </div>
+
               <ul
                 class="mt-2 text-sm text-gray-700 dark:text-slate-200 space-y-2"
               >
@@ -200,25 +227,28 @@
                   <span
                     class="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500"
                   ></span>
-                  وقت‌شناسی و پایبندی به زمان رزرو
+                  {{ $t("trust.ratings.criteria.punctuality") }}
                 </li>
+
                 <li class="flex gap-2">
                   <span
                     class="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500"
                   ></span>
-                  کیفیت سرویس نسبت به توضیحات
+                  {{ $t("trust.ratings.criteria.quality") }}
                 </li>
+
                 <li class="flex gap-2">
                   <span
                     class="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500"
                   ></span>
-                  برخورد حرفه‌ای و ارتباط
+                  {{ $t("trust.ratings.criteria.communication") }}
                 </li>
+
                 <li class="flex gap-2">
                   <span
                     class="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500"
                   ></span>
-                  شفافیت قیمت و هزینه‌های اضافی
+                  {{ $t("trust.ratings.criteria.priceTransparency") }}
                 </li>
               </ul>
             </div>
@@ -227,40 +257,47 @@
               class="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
               <div class="flex items-center justify-between gap-3">
-                <div class="font-extrabold">۳) متن بازخورد</div>
+                <div class="font-extrabold">
+                  {{ $t("trust.ratings.steps.feedback.title") }}
+                </div>
                 <span
                   class="text-xs rounded-full px-2 py-1 border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950/40 text-gray-600 dark:text-slate-300"
                 >
-                  شفاف
+                  {{ $t("trust.ratings.steps.feedback.badge") }}
                 </span>
               </div>
+
               <p
                 class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                بازخوردهای متنی کمک می‌کنند بفهمیم «چرا» امتیاز بالا/پایین ثبت
-                شده. توهین، اطلاعات شخصی یا محتوای نامرتبط نمایش داده نمی‌شود.
+                {{ $t("trust.ratings.steps.feedback.desc") }}
               </p>
             </div>
           </div>
         </div>
-
         <div class="lg:col-span-5 grid gap-4">
           <div
             class="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
           >
-            <h3 class="font-black">حق پاسخ برای متخصص</h3>
+            <h3 class="font-black">
+              {{ $t("trust.ratings.reply.title") }}
+            </h3>
+
             <p class="mt-2 text-sm text-gray-600 dark:text-slate-300 leading-6">
-              متخصص می‌تواند زیر یک بازخورد، پاسخ کوتاه و محترمانه ثبت کند تا
-              ابهام‌ها روشن شوند.
+              {{ $t("trust.ratings.reply.desc") }}
             </p>
+
             <div
               class="mt-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="text-sm font-bold">هدف ما</div>
+              <div class="text-sm font-bold">
+                {{ $t("trust.ratings.reply.goalTitle") }}
+              </div>
+
               <p
                 class="mt-1 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                تبدیل بازخورد به بهبود واقعی، نه جنگ اعصاب.
+                {{ $t("trust.ratings.reply.goalDesc") }}
               </p>
             </div>
           </div>
@@ -268,7 +305,10 @@
           <div
             class="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
           >
-            <h3 class="font-black">چه چیزی «بازخورد معتبر» حساب می‌شود؟</h3>
+            <h3 class="font-black">
+              {{ $t("trust.ratings.validFeedback.title") }}
+            </h3>
+
             <ul
               class="mt-3 space-y-2 text-sm text-gray-700 dark:text-slate-200"
             >
@@ -276,19 +316,21 @@
                 <span
                   class="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-500"
                 ></span>
-                مربوط به همان رزرو باشد
+                {{ $t("trust.ratings.validFeedback.v1") }}
               </li>
+
               <li class="flex gap-2">
                 <span
                   class="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-500"
                 ></span>
-                شامل جزئیات قابل بررسی باشد
+                {{ $t("trust.ratings.validFeedback.v2") }}
               </li>
+
               <li class="flex gap-2">
                 <span
                   class="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-500"
                 ></span>
-                محترمانه و بدون اطلاعات حساس باشد
+                {{ $t("trust.ratings.validFeedback.v3") }}
               </li>
             </ul>
 
@@ -297,13 +339,14 @@
                 to="/trust/refund-guarantee"
                 class="inline-flex items-center justify-center rounded-2xl px-4 py-3 font-bold border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
               >
-                ادامه: گارانتی بازگشت وجه
+                {{ $t("trust.ratings.links.refund") }}
               </NuxtLink>
+
               <NuxtLink
                 to="/trust/provider-verification"
                 class="inline-flex items-center justify-center rounded-2xl px-4 py-3 font-bold border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
               >
-                بازگشت: احراز هویت متخصصان
+                {{ $t("trust.ratings.links.provider") }}
               </NuxtLink>
             </div>
           </div>
@@ -315,7 +358,9 @@
         <div
           class="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-5 sm:p-6"
         >
-          <h2 class="text-lg sm:text-xl font-black">سوالات پرتکرار</h2>
+          <h2 class="text-lg sm:text-xl font-black">
+            {{ $t("trust.ratings.faq.title") }}
+          </h2>
 
           <div class="mt-4 space-y-3">
             <details
@@ -324,19 +369,19 @@
               <summary
                 class="cursor-pointer list-none flex items-center justify-between gap-3"
               >
-                <span class="font-bold text-sm sm:text-base"
-                  >چرا بعضی بازخوردها نمایش داده نمی‌شوند؟</span
-                >
+                <span class="font-bold text-sm sm:text-base">
+                  {{ $t("trust.ratings.faq.q1") }}
+                </span>
                 <span
                   class="text-xs text-gray-500 dark:text-slate-400 group-open:rotate-180 transition"
                   >⌄</span
                 >
               </summary>
+
               <p
                 class="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                اگر شامل توهین، اطلاعات شخصی، تبلیغ، یا محتوای نامرتبط باشد،
-                برای حفظ کیفیت و امنیت حذف/مخفی می‌شود.
+                {{ $t("trust.ratings.faq.a1") }}
               </p>
             </details>
 
@@ -346,19 +391,19 @@
               <summary
                 class="cursor-pointer list-none flex items-center justify-between gap-3"
               >
-                <span class="font-bold text-sm sm:text-base"
-                  >امتیاز منصفانه نیست؛ چه کنم؟</span
-                >
+                <span class="font-bold text-sm sm:text-base">
+                  {{ $t("trust.ratings.faq.q2") }}
+                </span>
                 <span
                   class="text-xs text-gray-500 dark:text-slate-400 group-open:rotate-180 transition"
                   >⌄</span
                 >
               </summary>
+
               <p
                 class="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                از گزینه «گزارش» استفاده کنید. تیم پشتیبانی بررسی می‌کند و اگر
-                بازخورد خلاف قوانین باشد، اصلاح می‌شود.
+                {{ $t("trust.ratings.faq.a2") }}
               </p>
             </details>
 
@@ -368,19 +413,19 @@
               <summary
                 class="cursor-pointer list-none flex items-center justify-between gap-3"
               >
-                <span class="font-bold text-sm sm:text-base"
-                  >آیا می‌شود امتیاز را تغییر داد؟</span
-                >
+                <span class="font-bold text-sm sm:text-base">
+                  {{ $t("trust.ratings.faq.q3") }}
+                </span>
                 <span
                   class="text-xs text-gray-500 dark:text-slate-400 group-open:rotate-180 transition"
                   >⌄</span
                 >
               </summary>
+
               <p
                 class="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-6"
               >
-                تا مدت کوتاهی بعد از ثبت (مثلاً اگر اشتباه کرده باشید) امکان
-                ویرایش وجود دارد؛ سپس قفل می‌شود تا از سوءاستفاده جلوگیری شود.
+                {{ $t("trust.ratings.faq.a3") }}
               </p>
             </details>
           </div>

@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300"
   >
     <UContainer class="py-8">
@@ -23,17 +22,16 @@
           >
             <div class="max-w-2xl">
               <h1 class="text-2xl sm:text-3xl font-black tracking-tight">
-                تماس با ما
+                {{ $t("contact.hero.title") }}
               </h1>
               <p
                 class="mt-2 text-sm sm:text-base text-gray-600 dark:text-slate-300 leading-7"
               >
-                پرسش، پیشنهاد یا گزارش مشکل دارید؟ پیام شما مستقیم برای تیم ما
-                ارسال می‌شود.
+                {{ $t("contact.hero.description") }}
                 <span class="font-bold text-gray-800 dark:text-white">{{
                   siteCopy.supportHours
                 }}</span>
-                و {{ siteCopy.supportResponseSla }}
+                {{ $t("contact.hero.and") }} {{ siteCopy.supportResponseSla }}
               </p>
 
               <div class="mt-5 flex flex-wrap gap-2">
@@ -41,19 +39,19 @@
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-                  پاسخ‌گویی سریع
+                  {{ $t("contact.badges.fast") }}
                 </span>
                 <span
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-blue-500"></span>
-                  پیام امن
+                  {{ $t("contact.badges.secure") }}
                 </span>
                 <span
                   class="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 px-3 py-1 text-xs sm:text-sm"
                 >
                   <span class="h-2 w-2 rounded-full bg-amber-500"></span>
-                  پیگیری‌پذیر
+                  {{ $t("contact.badges.trackable") }}
                 </span>
               </div>
             </div>
@@ -63,14 +61,16 @@
                 class="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-slate-950/40 p-4"
               >
                 <p class="text-xs text-gray-500 dark:text-slate-400">
-                  می‌خوای سریع‌تر؟
+                  {{ $t("contact.quick.title") }}
                 </p>
                 <div class="mt-3 grid grid-cols-1 gap-2">
                   <a
                     :href="`mailto:${targetEmail}`"
                     class="rounded-xl px-3 py-3 border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
                   >
-                    <div class="text-sm font-bold">ارسال ایمیل مستقیم</div>
+                    <div class="text-sm font-bold">
+                      {{ $t("contact.quick.email") }}
+                    </div>
                     <div class="text-xs opacity-80 mt-1">{{ targetEmail }}</div>
                   </a>
 
@@ -78,16 +78,18 @@
                     href="#form"
                     class="rounded-xl px-3 py-3 border border-primary-200/70 dark:border-primary-400/30 bg-primary-50 dark:bg-primary-500/10 text-primary-700 dark:text-primary-200"
                   >
-                    <div class="text-sm font-bold">ارسال پیام از فرم</div>
+                    <div class="text-sm font-bold">
+                      {{ $t("contact.quick.form") }}
+                    </div>
                     <div class="text-xs opacity-80 mt-1">
-                      همین‌جا، سریع و مرتب
+                      {{ $t("contact.quick.formDesc") }}
                     </div>
                   </a>
                 </div>
 
                 <div class="mt-4">
                   <p class="text-xs text-gray-500 dark:text-slate-400">
-                    کانال‌های سریع
+                    {{ $t("contact.quick.channels") }}
                   </p>
                   <div
                     class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-1"
@@ -108,7 +110,7 @@
                     >
                       <div class="text-sm font-bold">{{ channel.label }}</div>
                       <div class="mt-1 text-xs opacity-80">
-                        {{ channel.handle || "به‌زودی" }}
+                        {{ channel.handle || $t("common.comingSoon") }}
                       </div>
                     </component>
                   </div>
@@ -119,9 +121,7 @@
                   class="mt-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-3"
                 >
                   <div class="text-xs text-gray-600 dark:text-slate-300">
-                    برای جلوگیری از اسپم، لطفاً
-                    <span class="font-bold">{{ cooldownLeft }}</span>
-                    ثانیه صبر کنید و دوباره ارسال کنید.
+                    {{ $t("contact.cooldown.wait", { seconds: cooldownLeft }) }}
                   </div>
                 </div>
               </div>
@@ -139,9 +139,11 @@
           <div class="p-5 sm:p-7">
             <div class="flex items-start justify-between gap-3">
               <div>
-                <h2 class="text-lg sm:text-xl font-black">فرم تماس</h2>
+                <h2 class="text-lg sm:text-xl font-black">
+                  {{ $t("contact.form.title") }}
+                </h2>
                 <p class="mt-1 text-sm text-gray-600 dark:text-slate-300">
-                  لطفاً اطلاعات را دقیق وارد کنید تا سریع‌تر پاسخ بدهیم.
+                  {{ $t("contact.form.description") }}
                 </p>
               </div>
 
@@ -156,10 +158,10 @@
                 ></span>
                 {{
                   sent
-                    ? "ارسال شد"
+                    ? $t("contact.status.sent")
                     : loading
-                      ? "در حال ارسال..."
-                      : "آماده ارسال"
+                      ? $t("contact.status.sending")
+                      : $t("contact.status.ready")
                 }}
               </span>
             </div>
@@ -195,13 +197,12 @@
 
                   <div class="flex-1">
                     <div class="font-black text-base sm:text-lg">
-                      پیامت رسید ✅
+                      {{ $t("contact.success.title") }}
                     </div>
                     <div
                       class="mt-1 text-sm text-gray-700 dark:text-slate-200 leading-6"
                     >
-                      با موفقیت ارسال شد. اگر نیاز به پیگیری بود، از همین ایمیل
-                      به شما پاسخ می‌دهیم.
+                      {{ $t("contact.success.description") }}
                     </div>
                   </div>
 
@@ -210,7 +211,7 @@
                     class="rounded-xl"
                     @click="showSuccessOverlay = false"
                   >
-                    بستن
+                    {{ $t("common.close") }}
                   </UButton>
                 </div>
               </div>
@@ -220,13 +221,13 @@
               <div class="grid sm:grid-cols-2 gap-3">
                 <UInput
                   v-model="form.name"
-                  placeholder="نام و نام خانوادگی *"
+                  :placeholder="$t('contact.form.name')"
                   size="lg"
                 />
                 <UInput
                   v-model="form.email"
                   type="email"
-                  placeholder="ایمیل *"
+                  :placeholder="$t('contact.form.email')"
                   size="lg"
                 />
               </div>
@@ -235,13 +236,13 @@
                 <UInput
                   v-model="form.phone"
                   inputmode="tel"
-                  placeholder="موبایل (اختیاری)"
+                  :placeholder="$t('contact.form.phone')"
                   size="lg"
                 />
                 <USelect
                   v-model="form.topic"
                   :items="topics"
-                  placeholder="موضوع پیام *"
+                  :placeholder="$t('contact.form.topic')"
                   size="lg"
                 />
               </div>
@@ -262,14 +263,16 @@
                   v-model="form.message"
                   :rows="7"
                   class="w-full"
-                  placeholder="متن پیام شما *"
+                  :placeholder="$t('contact.form.message')"
                   size="lg"
                 />
 
                 <!-- Character counter + progress -->
                 <div class="flex items-center justify-between text-xs">
                   <span class="text-gray-600 dark:text-slate-300">
-                    حداقل {{ minMsg }} و حداکثر {{ maxMsg }} کاراکتر
+                    {{
+                      $t("contact.form.charLimit", { min: minMsg, max: maxMsg })
+                    }}
                   </span>
                   <span
                     class="font-bold"
@@ -284,6 +287,7 @@
                     {{ msgLen }} / {{ maxMsg }}
                   </span>
                 </div>
+
                 <div
                   class="h-2 w-full rounded-full bg-gray-200 dark:bg-white/10 overflow-hidden"
                 >
@@ -300,7 +304,7 @@
               >
                 <UCheckbox
                   v-model="form.agree"
-                  label="قوانین و حریم خصوصی را مطالعه کردم و موافقم."
+                  :label="$t('contact.form.agree')"
                 />
 
                 <div class="flex items-center justify-end gap-2">
@@ -310,7 +314,7 @@
                     class="rounded-xl"
                     @click="reset"
                   >
-                    پاک‌کردن
+                    {{ $t("common.clear") }}
                   </UButton>
 
                   <UButton
@@ -320,7 +324,7 @@
                     :loading="loading"
                     :disabled="!canSubmit"
                   >
-                    ارسال پیام
+                    {{ $t("contact.form.submit") }}
                   </UButton>
                 </div>
               </div>
@@ -339,7 +343,7 @@
                 <UAlert
                   color="success"
                   variant="soft"
-                  title="پیام شما با موفقیت ارسال شد."
+                  :title="$t('contact.success.alert')"
                 />
               </div>
             </transition>
@@ -348,8 +352,7 @@
           <div
             class="border-t border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4 text-xs text-gray-600 dark:text-slate-300"
           >
-            با ارسال پیام، شما موافقت می‌کنید که برای پیگیری، از اطلاعات تماس
-            شما استفاده شود.
+            {{ $t("contact.form.footer") }}
           </div>
         </UCard>
 
@@ -358,7 +361,7 @@
           <UCard
             class="p-6 bg-white dark:bg-slate-900/40 dark:border-white/10 border border-gray-200/70"
           >
-            <p class="font-black mb-3">اطلاعات تماس</p>
+            <p class="font-black mb-3">{{ $t("contact.info.title") }}</p>
 
             <ul class="space-y-2 text-sm text-gray-700 dark:text-slate-200">
               <li class="flex items-center gap-2">
@@ -378,7 +381,10 @@
             <div
               class="mt-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="text-sm font-bold">راه‌های ارتباط سریع</div>
+              <div class="text-sm font-bold">
+                {{ $t("contact.quickChannels") }}
+              </div>
+
               <div
                 class="mt-3 space-y-2 text-sm text-gray-700 dark:text-slate-200"
               >
@@ -389,7 +395,7 @@
                 >
                   <span>{{ channel.label }}</span>
                   <span class="text-xs text-gray-500 dark:text-slate-400">
-                    {{ channel.handle || "به‌زودی" }}
+                    {{ channel.handle || $t("common.comingSoon") }}
                   </span>
                 </div>
               </div>
@@ -398,7 +404,10 @@
             <div
               class="mt-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4"
             >
-              <div class="text-sm font-bold">لوکیشن دقیق</div>
+              <div class="text-sm font-bold">
+                {{ $t("contact.location.title") }}
+              </div>
+
               <p class="mt-1 text-xs text-gray-600 dark:text-slate-300">
                 {{ lat }}, {{ lng }}
               </p>
@@ -410,7 +419,7 @@
                   rel="noopener"
                   class="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-bold border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition"
                 >
-                  باز کردن در Google Maps
+                  {{ $t("contact.location.openMaps") }}
                 </a>
 
                 <UButton
@@ -418,7 +427,7 @@
                   class="rounded-xl justify-center"
                   @click="copyLocation"
                 >
-                  کپی کردن مختصات
+                  {{ $t("contact.location.copy") }}
                 </UButton>
               </div>
             </div>
@@ -433,7 +442,7 @@
                 :src="osmEmbedUrl"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-                title="نقشه سرویس‌هاب"
+                :title="$t('contact.map.title')"
               />
             </div>
           </UCard>
@@ -446,6 +455,7 @@
 <script setup lang="ts">
 import { siteConfig, siteCopy } from "~/constants/site";
 
+const { t } = useI18n();
 const toast = useToast();
 
 const loading = ref(false);
@@ -459,7 +469,6 @@ const fastChannels = siteConfig.contact.fastChannels;
 const lat = siteConfig.contact.lat;
 const lng = siteConfig.contact.lng;
 
-// map embed around point (OSM)
 const delta = 0.01;
 const left = lng - delta;
 const right = lng + delta;
@@ -471,27 +480,29 @@ const osmEmbedUrl = computed(() => {
   const bbox = `${left},${bottom},${right},${top}`;
   return `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${encodeURIComponent(marker)}`;
 });
+
 const googleMapsLink = computed(
   () => `https://www.google.com/maps?q=${lat},${lng}`,
 );
 
 const topics = [
-  { label: "پشتیبانی رزرو", value: "booking" },
-  { label: "گزارش تخلف", value: "abuse" },
-  { label: "پیشنهاد ویژگی", value: "feature" },
-  { label: "سایر موارد", value: "other" },
+  { label: t("contact.topics.booking"), value: "booking" },
+  { label: t("contact.topics.abuse"), value: "abuse" },
+  { label: t("contact.topics.feature"), value: "feature" },
+  { label: t("contact.topics.other"), value: "other" },
 ];
 
-// Anti-bot: require user to spend at least N ms before submit
 const mountedAt = ref<number>(Date.now());
 const minFillMs = 2500;
 
-// Client cooldown to avoid double submit
 const cooldownLeft = ref(0);
 let cooldownTimer: any = null;
+
 function startCooldown(seconds: number) {
   cooldownLeft.value = seconds;
+
   if (cooldownTimer) clearInterval(cooldownTimer);
+
   cooldownTimer = setInterval(() => {
     cooldownLeft.value = Math.max(0, cooldownLeft.value - 1);
     if (cooldownLeft.value === 0) clearInterval(cooldownTimer);
@@ -508,11 +519,11 @@ const form = reactive({
   topic: "" as string | undefined,
   message: "",
   agree: false,
-  // honeypot (bots tend to fill it)
   website: "",
 });
 
 const msgLen = computed(() => (form.message || "").length);
+
 const progressWidth = computed(() =>
   Math.min(100, Math.round((msgLen.value / maxMsg) * 100)),
 );
@@ -541,28 +552,32 @@ function reset() {
     agree: false,
     website: "",
   });
+
   error.value = "";
   sent.value = false;
 }
 
 function validate(): string {
-  // honeypot
-  if (form.website?.trim()) return "ارسال نامعتبر است.";
+  if (form.website?.trim()) return t("contact.errors.invalidSubmission");
 
-  if (!form.name.trim()) return "نام را وارد کنید.";
-  if (!/.+@.+\..+/.test(form.email)) return "ایمیل معتبر نیست.";
-  if (!form.topic) return "موضوع پیام را انتخاب کنید.";
-  if (!form.message.trim()) return "متن پیام را بنویسید.";
+  if (!form.name.trim()) return t("contact.errors.nameRequired");
+
+  if (!/.+@.+\..+/.test(form.email)) return t("contact.errors.invalidEmail");
+
+  if (!form.topic) return t("contact.errors.topicRequired");
+
+  if (!form.message.trim()) return t("contact.errors.messageRequired");
 
   if (msgLen.value < minMsg)
-    return `متن پیام خیلی کوتاه است (حداقل ${minMsg} کاراکتر).`;
-  if (msgLen.value > maxMsg)
-    return `متن پیام خیلی طولانی است (حداکثر ${maxMsg} کاراکتر).`;
+    return t("contact.errors.messageTooShort", { min: minMsg });
 
-  if (!form.agree) return "با قوانین موافقت کنید.";
+  if (msgLen.value > maxMsg)
+    return t("contact.errors.messageTooLong", { max: maxMsg });
+
+  if (!form.agree) return t("contact.errors.mustAgree");
 
   const spent = Date.now() - mountedAt.value;
-  if (spent < minFillMs) return "لطفاً چند لحظه صبر کنید و دوباره ارسال کنید.";
+  if (spent < minFillMs) return t("contact.errors.tooFast");
 
   return "";
 }
@@ -570,9 +585,16 @@ function validate(): string {
 async function copyLocation() {
   try {
     await navigator.clipboard.writeText(`${lat}, ${lng}`);
-    toast.add({ title: "مختصات کپی شد.", color: "success" });
+
+    toast.add({
+      title: t("contact.toast.coordsCopied"),
+      color: "success",
+    });
   } catch {
-    toast.add({ title: "کپی کردن ناموفق بود.", color: "warning" });
+    toast.add({
+      title: t("contact.toast.copyFailed"),
+      color: "warning",
+    });
   }
 }
 
@@ -594,12 +616,11 @@ async function submit() {
           phone: form.phone,
           topic: form.topic,
           message: form.message,
-          website: form.website, // honeypot
+          website: form.website,
           clientMeta: {
             page: "contact",
             lat,
             lng,
-            // anti-bot meta
             spentMs: Date.now() - mountedAt.value,
           },
         },
@@ -609,29 +630,31 @@ async function submit() {
     if (!res || (res as any).ok !== true) {
       throw createError({
         statusCode: 400,
-        statusMessage: (res as any)?.message || "ارسال ناموفق بود.",
+        statusMessage:
+          (res as any)?.message || t("contact.errors.submitFailed"),
       });
     }
 
     sent.value = true;
     showSuccessOverlay.value = true;
 
-    toast.add({ title: "پیام ارسال شد. ممنون!", color: "success" });
+    toast.add({
+      title: t("contact.toast.sent"),
+      color: "success",
+    });
 
-    // cooldown after a success
     startCooldown(20);
-
     reset();
-    // reset timer baseline for next message
+
     mountedAt.value = Date.now();
   } catch (e: any) {
     const msg =
       e?.data?.statusMessage ||
       e?.statusMessage ||
-      "خطا در ارسال پیام. کمی بعد دوباره تلاش کنید.";
+      t("contact.errors.serverError");
+
     error.value = msg;
 
-    // if server says rate limited, add a short cooldown anyway
     if (
       String(msg).includes("429") ||
       String(msg).includes("زیاد") ||

@@ -1,6 +1,5 @@
 <template>
   <div
-    dir="rtl"
     class="min-h-[100dvh] bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 flex items-center justify-center p-4"
   >
     <div
@@ -19,27 +18,46 @@
       >
         <div class="flex items-center justify-between">
           <span>مبلغ کل</span>
-          <span class="font-semibold">{{ formatToman(pricing.total_price_toman) }} تومان</span>
+          <span class="font-semibold"
+            >{{ formatToman(pricing.total_price_toman) }} تومان</span
+          >
         </div>
-        <div v-if="pricing.discount_amount_toman > 0" class="mt-1 flex items-center justify-between text-emerald-600 dark:text-emerald-300">
+        <div
+          v-if="pricing.discount_amount_toman > 0"
+          class="mt-1 flex items-center justify-between text-emerald-600 dark:text-emerald-300"
+        >
           <span>تخفیف</span>
-          <span class="font-semibold">-{{ formatToman(pricing.discount_amount_toman) }} تومان</span>
+          <span class="font-semibold"
+            >-{{ formatToman(pricing.discount_amount_toman) }} تومان</span
+          >
         </div>
-        <div class="mt-1 flex items-center justify-between font-extrabold text-slate-900 dark:text-slate-100">
+        <div
+          class="mt-1 flex items-center justify-between font-extrabold text-slate-900 dark:text-slate-100"
+        >
           <span>مبلغ قابل پرداخت</span>
           <span>{{ formatToman(pricing.payable_price_toman) }} تومان</span>
         </div>
         <div v-if="pricing.discount_scope" class="mt-1 text-[11px]">
           نوع تخفیف:
-          {{ pricing.discount_scope === "provider" ? "کد ارائه‌دهنده" : "تخفیف عمومی" }}
-          <span v-if="pricing.discount_code_upper">({{ pricing.discount_code_upper }})</span>
+          {{
+            pricing.discount_scope === "provider"
+              ? "کد ارائه‌دهنده"
+              : "تخفیف عمومی"
+          }}
+          <span v-if="pricing.discount_code_upper"
+            >({{ pricing.discount_code_upper }})</span
+          >
         </div>
       </div>
 
       <div class="mt-6 flex gap-2 justify-center">
         <UButton
           color="primary"
-          :to="providerId ? `/booking?provider=${encodeURIComponent(providerId)}` : '/search'"
+          :to="
+            providerId
+              ? `/booking?provider=${encodeURIComponent(providerId)}`
+              : '/search'
+          "
         >
           بازگشت به رزرو
         </UButton>
@@ -68,7 +86,9 @@ if (pid) {
   pricing.value = {
     total_price_toman: Number(intent?.total_price_toman || 0),
     discount_amount_toman: Number(intent?.discount_amount_toman || 0),
-    payable_price_toman: Number(intent?.payable_price_toman || intent?.total_price_toman || 0),
+    payable_price_toman: Number(
+      intent?.payable_price_toman || intent?.total_price_toman || 0,
+    ),
     discount_scope: intent?.discount_scope || null,
     discount_code_upper: intent?.discount_code_upper || null,
   };
