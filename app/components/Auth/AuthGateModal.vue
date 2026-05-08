@@ -551,7 +551,7 @@ function persistPref() {
 }
 
 function loadPref() {
-  if (!process.client) return;
+  if (!import.meta.client) return;
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return;
   try {

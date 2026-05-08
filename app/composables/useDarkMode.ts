@@ -5,7 +5,7 @@ export const useDarkMode = () => {
 
   const toggleDarkMode = () => {
     isDark.value = !isDark.value;
-    if (process.client) {
+    if (import.meta.client) {
       if (isDark.value) {
         document.documentElement.classList.add("dark");
         localStorage.setItem("darkMode", "true");
@@ -17,7 +17,7 @@ export const useDarkMode = () => {
   };
 
   const initDarkMode = () => {
-    if (!process.client) return;
+    if (!import.meta.client) return;
 
     const stored = localStorage.getItem("darkMode");
     const prefersDark = window.matchMedia(
