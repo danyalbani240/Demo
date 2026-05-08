@@ -7,7 +7,7 @@
         {{ $t("search.home") }}
       </NuxtLink>
       <span>/</span>
-      <NuxtLink to="/providers" class="hover:text-primary-600">
+      <NuxtLink to="/search" class="hover:text-primary-600">
         {{ $t("search.providers") }}
       </NuxtLink>
     </nav>
