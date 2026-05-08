@@ -377,6 +377,7 @@
 </template>
 <script setup lang="ts">
 import { siteCopy } from "~/constants/site";
+import { normalizePhone } from "~/utils/auth/normalizePhone";
 
 definePageMeta({
   middleware: "guest-only",
@@ -489,10 +490,6 @@ function computeNext(authNext?: string) {
   if (returnTo.value) return returnTo.value;
   if (authNext) return authNext;
   return "/dashboard";
-}
-
-function normalizePhone(v: string) {
-  return String(v || "").trim();
 }
 
 function mapRoleToBackend(r: Role): "user" | "provider" {

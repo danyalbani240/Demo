@@ -93,7 +93,7 @@
                 </div>
 
                 <button
-                  class="flex-shrink-0 px-4 py-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50/80 dark:hover:bg-indigo-900/30 rounded-xl transition-all duration-200 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="shrink-0 px-4 py-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50/80 dark:hover:bg-indigo-900/30 rounded-xl transition-all duration-200 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                   :disabled="loading || stage !== 'form'"
                   @click="toggleMode"
                 >
@@ -329,7 +329,9 @@
           </div>
           <UCard v-else class="p-5 rounded-2xl">
             <div class="flex flex-col items-center justify-center">
-              <p class="mb-5">کد چهار رقتی ارسال شده را برای شماره {{ form.phone }} وارد کنید.</p>
+              <p class="mb-5">
+                کد چهار رقتی ارسال شده را برای شماره {{ form.phone }} وارد کنید.
+              </p>
               <UInput
                 v-model="otp.code"
                 placeholder="کد تایید"
@@ -387,7 +389,7 @@
   >
     <div
       v-if="success"
-      class="fixed inset-0 z-[9999] grid place-items-center bg-black/30 backdrop-blur-xl"
+      class="fixed inset-0 z-9999 grid place-items-center bg-black/30 backdrop-blur-xl"
       aria-live="polite"
       aria-atomic="true"
     >
@@ -500,27 +502,26 @@ const inputUIConfig = {
 };
 
 // validation (matching auth page)
-const validatePhone = (value: string): boolean => /^09\d{9}$/.test(normalizeUserInput(value));
-const validatePassword = (value: string): boolean => normalizeUserInput(value).length >= 6; // backend uses 6 chars min
-const validateFullName = (value: string): boolean => normalizeUserInput(value).trim().length >= 3;
+const validatePhone = (value: string): boolean =>
+  /^09\d{9}$/.test(normalizeUserInput(value));
+const validatePassword = (value: string): boolean =>
+  normalizeUserInput(value).length >= 6; // backend uses 6 chars min
+const validateFullName = (value: string): boolean =>
+  normalizeUserInput(value).trim().length >= 3;
 
 const validateForm = (): string | null => {
   const p = normalizeUserInput(form.phone);
   if (!validatePhone(p)) return "شماره موبایل معتبر نیست";
   if (!validatePassword(form.password)) return "رمز عبور حداقل ۶ کاراکتر";
-  if (mode.value === "signup" && !validateFullName(form.name)) return "نام را وارد کنید";
+  if (mode.value === "signup" && !validateFullName(form.name))
+    return "نام را وارد کنید";
   return null;
 };
-
-// helper functions (matching auth page)
-function normalizePhone(v: string) {
-  return String(v || "").trim();
-}
 
 // Convert Persian digits to English digits
 function normalizeDigits(input: string): string {
   if (!input) return input;
-  
+
   const digitMap = {
     "۰": "0",
     "۱": "1",
@@ -531,9 +532,9 @@ function normalizeDigits(input: string): string {
     "۶": "6",
     "۷": "7",
     "۸": "8",
-    "۹": "9"
+    "۹": "9",
   } as const;
-  
+
   return input.split("").reduce((result, char) => {
     return result + (digitMap[char as keyof typeof digitMap] || char);
   }, "");
@@ -546,10 +547,7 @@ function normalizeUserInput(input: string): string {
 
 function persistPref() {
   if (!import.meta.client) return;
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ mode: mode.value }),
-  );
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode: mode.value }));
 }
 
 function loadPref() {
@@ -563,7 +561,7 @@ function loadPref() {
   } catch {}
 }
 
-function pulseError(message?: string) { 
+function pulseError(message?: string) {
   shake.value = true;
   setTimeout(() => (shake.value = false), 450);
   if (message)
@@ -576,7 +574,9 @@ function pulseError(message?: string) {
 
 async function showSuccessThenGo(next: string) {
   success.value = true;
-  successText.value = next.includes("dashboard") ? "ورود موفق ✨" : "ثبت‌نام موفق ✨";
+  successText.value = next.includes("dashboard")
+    ? "ورود موفق ✨"
+    : "ثبت‌نام موفق ✨";
   await new Promise((r) => setTimeout(r, 650));
   await router.push(next);
 }
@@ -841,7 +841,7 @@ async function submit() {
   }
 
   if (loading.value) return;
-  
+
   await startAuth();
 }
 
@@ -878,7 +878,6 @@ function goBackToForm() {
   otp.code = "";
 }
 </script>
-
 
 <style scoped>
 @keyframes pop {

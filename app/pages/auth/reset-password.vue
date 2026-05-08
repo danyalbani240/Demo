@@ -115,6 +115,8 @@
 </template>
 
 <script setup lang="ts">
+import { isValidIranPhone, normalizePhone } from "~/utils/auth/normalizePhone";
+
 definePageMeta({ layout: "default" });
 
 const toast = useToast();
@@ -135,13 +137,6 @@ const resendCooldown = ref(0);
 let resendTimer: any = null;
 
 const phoneLocked = computed(() => Boolean(route.query.phone));
-
-function normalizePhone(v: string) {
-  return String(v || "").trim();
-}
-function isValidIranPhone(v: string) {
-  return /^09\d{9}$/.test(normalizePhone(v));
-}
 
 onMounted(() => {
   const qPhone = String(route.query.phone || "").trim();
@@ -206,12 +201,12 @@ async function submit() {
   errorMsg.value = "";
   successMsg.value = "";
 
-  const p = normalizePhone(form.phone);
+  const phone = normalizePhone(form.phone);
   const code = String(form.code || "").trim();
   const pass = String(form.newPassword || "");
   const confirm = String(form.confirm || "");
 
-  if (!isValidIranPhone(p)) {
+  if (!isValidIranPhone(phone)) {
     errorMsg.value = "شماره موبایل معتبر نیست";
     return;
   }
@@ -232,7 +227,7 @@ async function submit() {
   try {
     const res: any = await $fetch("/api/auth/password/reset", {
       method: "POST",
-      body: { phone: p, code, new_password: pass },
+      body: { phone, code, new_password: pass },
     });
 
     if (!res?.success) {

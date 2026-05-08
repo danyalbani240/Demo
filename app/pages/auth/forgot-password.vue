@@ -76,6 +76,8 @@
 </template>
 
 <script setup lang="ts">
+import { isValidIranPhone, normalizePhone } from "~/utils/auth/normalizePhone";
+
 definePageMeta({ layout: "default" });
 
 const toast = useToast();
@@ -85,18 +87,11 @@ const phone = ref("");
 const loading = ref(false);
 const errorMsg = ref("");
 
-function normalizePhone(v: string) {
-  return String(v || "").trim();
-}
-function isValidIranPhone(v: string) {
-  return /^09\d{9}$/.test(normalizePhone(v));
-}
-
 async function submit() {
   errorMsg.value = "";
-  const p = normalizePhone(phone.value);
+  const phoneNumber = normalizePhone(phone.value);
 
-  if (!isValidIranPhone(p)) {
+  if (!isValidIranPhone(phoneNumber)) {
     errorMsg.value = "شماره موبایل معتبر نیست";
     return;
   }
@@ -105,7 +100,7 @@ async function submit() {
   try {
     const res: any = await $fetch("/api/auth/password/forgot", {
       method: "POST",
-      body: { phone: p },
+      body: { phone: phoneNumber },
     });
 
     if (!res?.success) {
@@ -115,11 +110,14 @@ async function submit() {
 
     toast.add({
       title: "کد ارسال شد",
-      description: `کد تایید به ${p} ارسال شد.`,
+      description: `کد تایید به ${phoneNumber} ارسال شد.`,
       color: "success",
     });
 
-    await router.push({ path: "/auth/reset-password", query: { phone: p } });
+    await router.push({
+      path: "/auth/reset-password",
+      query: { phone: phoneNumber },
+    });
   } catch (e: any) {
     errorMsg.value = String(
       e?.data?.message || e?.statusMessage || "ارسال کد ناموفق بود",
