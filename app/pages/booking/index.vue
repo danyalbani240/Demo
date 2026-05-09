@@ -118,12 +118,13 @@
               :selected-date="selectedDate"
               :selectedTime="selectedSlot?.label ?? ''"
               :selectedServiceIds="selectedServiceIds"
-              :finalPrice="finalPrice ?? 0"
-              :loading="loading"
+              :finalPrice="payablePrice ?? 0"
+              :loading="bookingLoading"
+              :error="bookingError"
               @confirm="confirmBooking"
             >
               <ReservationCheckCoupan
-                :loading="loading"
+                :loading="quoteLoading"
                 v-model="discountCode"
                 :discountAmount="discountAmount ?? 0"
                 @apply="fetchQuote"
@@ -144,14 +145,11 @@ const toast = useToast();
 import { useBooking } from "~/composables/useBooking";
 import { useProviderApiRepository } from "~/repositories/providers.repo";
 import type { BookingPayload } from "~/types";
-const loading = ref(false);
 // form state
 const selectedServiceIds = ref<string[]>([]);
 const selectedDate = ref<string>(normalizeDateKey(tehranTimeZone()));
 const selectedSlot = ref();
 const route = useRoute();
-const discountCode = ref();
-const discountAmount = ref<number>();
 const providerId = computed(() => route.query.provider as string | undefined);
 const finalPrice = ref<number>(0);
 
@@ -189,15 +187,19 @@ const { data: provider } = await useAsyncData(
 const providerName = provider.value.full_name || provider.value.business_name;
 //
 
-const { handleBooking } = useBooking();
+const {
+  handleBooking,
+  bookingLoading,
+  bookingError,
+} = useBooking();
 const confirmBooking = async () => {
-  const payload = ref<BookingPayload>({
+  const payload: BookingPayload = {
     providerId: providerId.value ?? "",
     serviceIds: selectedServiceIds.value,
     startAt: buildStartAt(selectedDate.value, selectedSlot.value.startMin),
-    discountCode: "",
-  });
-  return await handleBooking(payload.value);
+    discountCode: String(discountCode.value || "").trim() || undefined,
+  };
+  return await handleBooking(payload);
 };
 watch(selectedServiceIds, () => {
   // Safety check for provider.services
@@ -220,10 +222,16 @@ watch(selectedServiceIds, () => {
 
   finalPrice.value = total;
 });
-const { fetchQuote } = usePricing(
-  providerId.value ?? "",
-  selectedServiceIds.value,
-  ref(+finalPrice?.value) || ref(0),
+const {
+  discountCode,
+  discountAmount,
+  payablePrice,
+  quoteLoading,
+  fetchQuote,
+} = usePricing(
+  providerId,
+  selectedServiceIds,
+  finalPrice,
 );
 </script>
 

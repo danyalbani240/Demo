@@ -40,8 +40,11 @@ export function useAvailability() {
 
       return res.data.slots;
     } catch (e: any) {
-      // error.value = e?.data?.message || e?.message || "خطا در دریافت ساعت‌ها";
-      console.log(e);
+      toast.add({
+        title: "خطا",
+        description: e?.data?.message || e?.message || "خطا در دریافت ساعت‌ها",
+        color: "error",
+      });
     } finally {
       loading.value = false;
     }

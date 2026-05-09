@@ -83,18 +83,10 @@
                   </div>
 
                   <span
-                    v-if="provider?.done_services"
+                    v-show="provider?.done_services"
                     class="text-gray-300 dark:text-slate-600"
                     >•</span
                   >
-
-                  <!-- <div
-                    v-if="provider?.responseTime"
-                    class="flex items-center gap-1 text-gray-700 dark:text-slate-200"
-                  >
-                    <UIcon name="i-heroicons-clock" class="w-4 h-4" />
-                    <span>میانگین پاسخ‌گویی: {{ provider?.responseTime }}</span>
-                  </div> -->
                 </div>
               </div>
             </div>

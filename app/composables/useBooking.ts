@@ -18,14 +18,12 @@ export function useBooking() {
   }
 
   async function handleBooking(payload: BookingPayload) {
-    console.log(payload);
-
     const toast = useToast();
     const isLoggedIn = useAuthStore().isAuthed;
     if (!isLoggedIn) {
       toast.add({
         title: "اخطار",
-        description: "قبل از رزرو باید لایگن کنید",
+        description: "قبل از رزرو باید لاگین کنید",
         color: "error",
       });
       return;
@@ -33,7 +31,6 @@ export function useBooking() {
 
     loading.value = true;
     error.value = "";
-    console.log(payload);
     try {
       const data = await initiatePayment(payload);
       window.location.href = data.redirectUrl;

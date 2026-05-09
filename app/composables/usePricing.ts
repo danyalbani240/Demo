@@ -1,5 +1,6 @@
 // composables/usePricing.ts
 import { ref, computed } from "vue";
+import type { Ref } from "vue";
 
 interface PaymentQuote {
   subtotal_toman: number;
@@ -9,12 +10,12 @@ interface PaymentQuote {
 }
 
 export function usePricing(
-  providerId: string,
-  selectedServiceIds: string[],
+  providerId: Ref<string | undefined>,
+  selectedServiceIds: Ref<string[]>,
   totalPrice: Ref<number>,
 ) {
   const authStore = useAuthStore();
-  const isLoggedIn = authStore.isAuthed;
+  const isLoggedIn = computed(() => authStore.isAuthed);
   const discountCode = ref("");
   const pricingQuote = ref<PaymentQuote | null>(null);
 
@@ -40,7 +41,11 @@ export function usePricing(
   const normalizedCode = computed(() => discountCode.value.trim());
 
   async function fetchQuote() {
-    if (!isLoggedIn || !providerId || selectedServiceIds.length === 0) {
+    if (
+      !isLoggedIn.value ||
+      !providerId.value ||
+      selectedServiceIds.value.length === 0
+    ) {
       pricingQuote.value = null;
       return;
     }
@@ -52,8 +57,8 @@ export function usePricing(
       const res: any = await $fetch("/api/payment/quote", {
         method: "POST",
         body: {
-          providerId: providerId,
-          serviceIds: selectedServiceIds,
+          providerId: providerId.value,
+          serviceIds: selectedServiceIds.value,
           ...(normalizedCode.value && {
             discountCode: normalizedCode.value,
           }),

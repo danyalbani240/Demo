@@ -45,8 +45,8 @@
       <ReservationSummaryRow label="مدت کل" :value="totalDuration" />
     </div>
 
-    <p v-if="errorMsg" class="mt-4 text-sm text-red-600">
-      {{ errorMsg }}
+    <p v-if="props.error" class="mt-4 text-sm text-red-600">
+      {{ props.error }}
     </p>
     <button
       class="mt-6 w-full cursor-pointer rounded-xl bg-blue-600 text-white py-3"
@@ -77,15 +77,19 @@
         <button
           type="button"
           class="rounded-xl bg-slate-900 px-5 py-3 text-sm font-extrabold text-white hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
-          :disabled="!canConfirmBooking || isProcessingBooking"
+          :disabled="!canConfirmBooking || props.loading"
+          @click="emit('confirm')"
         >
-          <span v-if="isProcessingBooking">در حال ثبت…</span>
+          <span v-if="props.loading">در حال ثبت…</span>
           <span v-else>ثبت رزرو</span>
         </button>
       </div>
 
-      <p v-if="errorMsg" class="mt-2 text-xs text-rose-600 dark:text-rose-300">
-        {{ errorMsg }}
+      <p
+        v-if="props.error"
+        class="mt-2 text-xs text-rose-600 dark:text-rose-300"
+      >
+        {{ props.error }}
       </p>
     </UContainer>
   </div>
@@ -101,13 +105,13 @@ const props = defineProps<{
   selectedTime: string;
   finalPrice: number;
   loading: boolean;
+  error?: string;
 }>();
 //provider values =
 
-const providerName = props.provider.full_name || props.provider.business_name;
-const loading = ref(false);
-const { bookingLoading: isProcessingBooking, bookingError: errorMsg } =
-  useBooking();
+const providerName = computed(
+  () => props.provider.full_name || props.provider.business_name || "—",
+);
 const canConfirmBooking = computed(() => {
   const providerAvailable = props.provider?.is_active !== false;
   const allFieldsSelected =
@@ -138,7 +142,7 @@ const emit = defineEmits([
 //       .join("، ") || "-",
 // );
 
-const dateText = ref(formatJalaliShort(props.selectedDate));
+const dateText = computed(() => formatJalaliShort(props.selectedDate));
 const selectedServiceIdSet = computed(() => {
   return toIdSet(props.selectedServiceIds);
 });

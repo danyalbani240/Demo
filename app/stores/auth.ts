@@ -35,7 +35,14 @@ export const useAuthStore = defineStore("auth", {
       let returnValue = null;
       this.initializing = true;
       try {
-        const res: any = await $fetch("/api/auth/me", { method: "GET" });
+        const headers = import.meta.server
+          ? useRequestHeaders(["cookie"])
+          : undefined;
+
+        const res: any = await $fetch("/api/auth/me", {
+          method: "GET",
+          headers,
+        });
         if (res?.success) {
           this.user = res.data?.user ?? null;
           this.next = res.data?.next ?? "";
@@ -50,8 +57,9 @@ export const useAuthStore = defineStore("auth", {
       } finally {
         this.initializing = false;
         this.ready = true;
-        return returnValue;
       }
+
+      return returnValue;
     },
 
     async login(payload: { phone: string; password: string }) {
@@ -262,77 +270,6 @@ export const useAuthStore = defineStore("auth", {
       } finally {
         this.loading = false;
       }
-    },
-
-    /* ---------------- Provider samples: consistent return shapes ---------------- */
-    async getMySamples() {
-      try {
-        const response: any = await $fetch("/api/provider-samples/me");
-        const items = response?.success ? response.data?.samples || [] : [];
-        return { ok: true as const, samples: items };
-      } catch (error) {
-        console.error("Failed to fetch samples:", error);
-        return { ok: false as const, samples: [] as any[] };
-      }
-    },
-
-    async createSample(payload: { image_url: string; file_key: string }) {
-      try {
-        const response: any = await $fetch("/api/provider-samples/me", {
-          method: "POST",
-          body: payload,
-        });
-
-        if (!response?.success) {
-          return {
-            ok: false as const,
-            sample: null,
-            message: response?.message || "ایجاد نمونه‌کار ناموفق بود",
-          };
-        }
-
-        // backend: { data: { sample: doc } }
-        return { ok: true as const, sample: response.data?.sample ?? null };
-      } catch (error) {
-        console.error("Failed to create sample:", error);
-        return {
-          ok: false as const,
-          sample: null,
-          message: "ایجاد نمونه‌کار ناموفق بود",
-        };
-      }
-    },
-
-    async deleteSample(sampleId: string) {
-      try {
-        const res: any = await $fetch(`/api/provider-samples/me/${sampleId}`, {
-          method: "DELETE",
-        });
-
-        if (!res?.success) return { ok: false as const };
-        return { ok: true as const };
-      } catch (error) {
-        console.error("Failed to delete sample:", error);
-        return { ok: false as const };
-      }
-    },
-
-    /* ---------------- uploads ---------------- */
-    async getUploadPresign(folder: string, contentType: string) {
-      const response: any = await $fetch("/api/uploads/presign", {
-        method: "POST",
-        body: { folder, contentType },
-      });
-      return response?.success ? response.data : null;
-    },
-
-    async deleteFile(key: string, publicUrl: string) {
-      // keep as-is (if your API exists). If it throws, page already handles.
-      await $fetch("/api/uploads/delete", {
-        method: "DELETE",
-        body: { key, publicUrl },
-      });
-      return true;
     },
   },
 });

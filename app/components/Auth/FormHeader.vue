@@ -1,0 +1,43 @@
+<template>
+  <div class="text-center">
+    <div
+      class="mx-auto inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-3 py-1 text-[12px] text-zinc-800 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200"
+    >
+      <span
+        class="h-2 w-2 rounded-full bg-indigo-500 shadow-[0_0_0_4px_rgba(99,102,241,.14)]"
+      />
+      <span>ServiceHub • ورود / ثبت‌نام</span>
+    </div>
+
+    <h1 class="mt-3 text-[26px] font-black tracking-tight">
+      {{ mode === "login" ? "خوش اومدی 👋" : "شروع کنیم 🚀" }}
+    </h1>
+
+    <p class="mt-2 text-[13px] leading-7 text-zinc-600 dark:text-zinc-300/80">
+      {{ introText }}
+    </p>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { siteCopy } from "~/constants/site";
+
+const props = defineProps<{ mode: string; role: string }>();
+const route = useRoute();
+const introText = computed(() => {
+  if (props.mode === "login") {
+    return returnTo.value
+      ? "با شماره موبایل و رمز عبور وارد شوید تا به همان صفحه برگردید. اگر تایید پیامکی فعال باشد، کد هم برایتان ارسال می‌شود."
+      : siteCopy.authMethod;
+  }
+
+  return props.role === "provider"
+    ? "برای حساب متخصص، شماره موبایل و رمز عبور را ثبت می‌کنید و در صورت نیاز، تایید پیامکی هم انجام می‌شود."
+    : "برای ساخت حساب مشتری، شماره موبایل و رمز عبور را وارد می‌کنید و در بعضی حساب‌ها مرحله تایید پیامکی هم وجود دارد.";
+});
+const returnTo = computed(() => {
+  const q = route.query.redirect;
+  if (typeof q === "string" && q.startsWith("/")) return q;
+  return "";
+});
+</script>

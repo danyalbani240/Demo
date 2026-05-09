@@ -13,7 +13,6 @@
 
 <script setup>
 const { visible } = useLoader();
-console.log("i am here ");
 </script>
 
 <style scoped>
