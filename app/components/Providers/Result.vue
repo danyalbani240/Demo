@@ -1,22 +1,5 @@
 <template>
   <div class="mt-4 sm:mt-6">
-    <!-- Error (soft) -->
-    <!-- <div
-          v-if="errorMsg"
-          class="mb-4 rounded-2xl border border-rose-200 bg-rose-50/70 p-4 text-rose-800 dark:border-rose-900/40 dark:bg-rose-950/30 dark:text-rose-200"
-        >
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>{{ errorMsg }}</p>
-            <UButton
-              color="error"
-              variant="outline"
-              class="w-full sm:w-auto"
-            >
-              تلاش دوباره
-            </UButton>
-          </div>
-        </div> -->
-
     <!-- Loading skeleton -->
     <div
       v-if="false"
@@ -60,14 +43,6 @@
         فعلاً نتیجه‌ای برای این جستجو نداریم. فیلترها را بازنشانی کنید یا اگر
         ارائه‌دهنده این خدمات هستید، ثبت‌نام متخصص را شروع کنید.
       </p>
-      <div class="mt-5 flex flex-wrap justify-center gap-3">
-        <!-- <UButton variant="outline" class="rounded-xl" @click="resetAll">
-              بازنشانی
-            </UButton> -->
-        <!-- <UButton color="primary" class="rounded-xl" :to="siteConfig.providerJoinPath">
-              ثبت‌نام متخصص
-            </UButton> -->
-      </div>
     </div>
 
     <!-- Results grid -->

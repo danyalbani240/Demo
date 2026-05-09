@@ -10,30 +10,7 @@
       <ReservationSummaryRow label="روز" :value="dateText" />
       <ReservationSummaryRow label="ساعت" :value="selectedTime" />
 
-      <!-- Coupon -->
-
       <slot></slot>
-      <!-- <div class="pt-4 border-t">
-        <ReservationCheckCoupan
-          :modelValue="discountCode"
-          @update:modelValue="emit('update:discountCode', $event)"
-          :loading="quoteLoading"
-          :error="quoteError"
-          :discountAmount="discountAmount"
-          :discountScope="discountScope"
-          @apply="emit('applyDiscount')"
-          @clear="emit('clearDiscount')"
-        />
-      </div> -->
-
-      <!-- Pricing -->
-      <!-- <ReservationSummaryRow label="جمع خدمات" :value="subtotalText" /> -->
-
-      <!-- <ReservationSummaryRow
-        v-if="discountAmount > 0"
-        label="تخفیف"
-        :value="discountText"
-      /> -->
 
       <ReservationSummaryRow
         class="pt-3 border-t"
@@ -107,7 +84,6 @@ const props = defineProps<{
   loading: boolean;
   error?: string;
 }>();
-//provider values =
 
 const providerName = computed(
   () => props.provider.full_name || props.provider.business_name || "—",
@@ -122,25 +98,7 @@ const canConfirmBooking = computed(() => {
 
   return providerAvailable && allFieldsSelected;
 });
-const emit = defineEmits([
-  // "update:discountCode",
-  // "applyDiscount",
-  // "clearDiscount",
-
-  "confirm",
-]);
-
-// const providerName = computed(
-//   () => provider.value?.business_name || provider.value?.full_name,
-// );
-
-// const servicesText = computed(
-//   () =>
-//     selectedServices.value
-//       ?.map((s: any) => s?.title)
-//       .filter(Boolean)
-//       .join("، ") || "-",
-// );
+const emit = defineEmits(["confirm"]);
 
 const dateText = computed(() => formatJalaliShort(props.selectedDate));
 const selectedServiceIdSet = computed(() => {

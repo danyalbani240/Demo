@@ -1,7 +1,4 @@
 <template>
-  <!-- 
-     v-for="c in categories"
-		:key="props.category.slug" -->
   <UCard
     class="hover:shadow-lg min-h-full dark:hover:shadow-primary-500/20 cursor-pointer transition-all duration-300 dark:bg-slate-800/50 dark:border-slate-700 group"
     @click="goToCategory"

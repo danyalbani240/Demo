@@ -1,10 +1,9 @@
 <template>
   <footer
-    
     class="bg-white dark:bg-slate-900/50 border-t border-gray-200 dark:border-slate-800 mt-10 transition-colors duration-300"
   >
     <UContainer class="py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- درباره ما -->
+      <!-- about us -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
           {{ $t("footer.about_title") }}
@@ -19,7 +18,7 @@
         </p>
       </div>
 
-      <!-- راهنما -->
+      <!-- guide -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
           {{ $t("footer.help_title") }}
@@ -64,7 +63,7 @@
         </ul>
       </div>
 
-      <!-- اعتماد و شفافیت -->
+      <!-- trust and transparency -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
           {{ $t("footer.trust_title") }}
@@ -91,7 +90,7 @@
         </ul>
       </div>
 
-      <!-- خبرنامه -->
+      <!-- newsletter -->
       <div>
         <p class="font-bold mb-3 text-slate-900 dark:text-white">
           {{ $t("footer.newsletter_title") }}
