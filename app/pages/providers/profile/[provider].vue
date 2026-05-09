@@ -151,7 +151,7 @@
                 :key="item?.id"
                 :src="item?.image_url"
                 alt=""
-                class="rounded-xl object-cover w-full aspect-[4/3] hover:brightness-95 dark:hover:brightness-110 transition"
+                class="rounded-xl object-cover w-full aspect-4/3 hover:brightness-95 dark:hover:brightness-110 transition"
               />
             </div>
           </UCard>
@@ -262,110 +262,57 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Provider } from "~/types";
+import { useProviderApiRepository } from "~/repositories/providers.repo";
+
+interface GallerySample {
+  id: string | number;
+  image_url: string;
+}
 
 const route = useRoute();
-const providerId = computed(() => String(route.params.provider || ""));
-
-const bootstrapStore = useBootstrapStore();
 const toast = useToast();
-// Ensure categories exist for banner/category names, etc.
-await useAsyncData("categories", async () => {
-  await bootstrapStore.getCategories();
-  return true;
-});
+const providerId = computed(() => String(route.params.provider || ""));
+const api = useProviderApiRepository();
+// 1. Data State
+const provider = ref();
+const gallery = ref<{ samples: GallerySample[] }>({ samples: [] });
 
-const provider = ref<Provider>();
-const gallery = ref<{ samples: any[] }>({ samples: [] });
-
+// 2. Pure Presentation Logic (Computed)
 const workEthic = computed(() => {
-  if (!provider.value) {
-    return;
-  }
-  const value = provider?.value?.work_ethic;
-  if (!value) return [] as string[];
-  if (Array.isArray(value)) return value;
-
-  // Backend stores work_ethic as a string, split by commas or newlines
-  return String(value)
-    .split(/[,\n]+/)
-    .map((item) => item.trim())
-    .filter((item) => item.length > 0);
+  const value = provider.value?.work_ethic;
+  if (!value) return [];
+  return Array.isArray(value)
+    ? value
+    : String(value)
+        .split(/[,\n]+/)
+        .map((i) => i.trim())
+        .filter(Boolean);
 });
 
-function formatPrice(n: number): string {
-  try {
-    return Number(n || 0).toLocaleString("fa-IR");
-  } catch {
-    return String(n || 0);
-  }
-}
-
-function bookNow() {
-  if (!provider?.value?.id) return;
-  navigateTo(`/booking?provider=${provider?.value.id}`);
-}
-
-// SSR load provider + services + samples (backend owns everything)
-const { data, error } = await useAsyncData(
-  `provider:${providerId.value}`,
+// 3. Normalized Fetching
+const { error } = await useAsyncData(
+  `profile:${providerId.value}`,
   async () => {
-    if (!providerId.value) return null;
-
-    const [pRes, gRes] = await Promise.all([
-      $fetch(`/api/providers/${providerId.value}?include=services`), // Provider + Services
-      $fetch(`/api/provider-samples/${providerId.value}`), // Samples separately
-    ]);
-
-    const providerOk = pRes?.success === true || pRes?.status === "success";
-    if (!providerOk) {
-      const msg = pRes?.message || "بارگذاری اطلاعات ناموفق بود";
-      if (process.client) {
-        toast.add({ title: "خطا", description: msg, color: "error" });
-      }
-      throw new Error(msg);
+    const res = await api.getFullProfile(providerId.value);
+    console.log(res);
+    if (!res.success || !res.data) {
+      if (import.meta.client)
+        toast.add({ title: "خطا", description: res.message, color: "error" });
+      throw new Error(res.message);
     }
 
-    const provider = pRes?.data?.provider;
-    if (!provider) {
-      toast.add({
-        title: "خطا",
-        description: "داده‌های سرویس دهنده پیدا نشد",
-        color: "error",
-      });
-      throw new Error("داده‌های سرویس دهنده پیدا نشد");
-    }
-
-    const rawSamples = gRes?.success
-      ? (gRes.data?.samples ?? gRes.data?.items ?? gRes.data ?? [])
-      : [];
-    const samples = Array.isArray(rawSamples) ? rawSamples : [];
-
-    return { provider, samples };
+    provider.value = res.data?.provider;
+    gallery.value.samples = res.data?.samples || [];
+    return true;
   },
 );
 
-if (error.value) {
-  console.error("provider load error:", error.value);
-  provider.value = undefined;
-  gallery.value = { samples: [] };
-} else if (data.value) {
-  provider.value = data.value.provider as Provider;
-  gallery.value = {
-    samples: Array.isArray(data.value.samples) ? data.value.samples : [],
-  };
-}
+// 4. Utility helpers
+const formatPrice = (n: number) => Number(n || 0).toLocaleString("fa-IR");
 
-useHead({
-  title: "پروفایل متخصص | سرویس هاب",
-  meta: [
-    {
-      name: "description",
-      content:
-        "پروفایل کامل متخصص: آواتار، احراز هویت، تعرفه‌ها، سوابق، نمونه‌کار و نظرات مشتریان.",
-    },
-  ],
-});
+function bookNow() {
+  if (provider.value?.id) navigateTo(`/booking?provider=${provider.value.id}`);
+}
 </script>
 
 <style scoped>
