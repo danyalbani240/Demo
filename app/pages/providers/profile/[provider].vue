@@ -12,8 +12,7 @@
           'banner-hair': provider?.category === '696a545d4f93795b47baa8bb',
         }"
       ></div>
-      <!-- {{ provider.category }} -->
-      <!-- Overlay Profile Card -->
+
       <div
         class="max-w-screen-2xl mx-auto px-4 -mt-16 sm:-mt-20 lg:-mt-24 relative z-10"
       >
@@ -23,6 +22,7 @@
           <div class="flex flex-col lg:flex-row lg:items-center gap-4 sm:gap-6">
             <div class="flex flex-col sm:flex-row items-start gap-4">
               <UAvatar
+                v-if="provider?.avatar"
                 :src="provider?.avatar || ''"
                 class="ring-4 ring-white rounded-2xl dark:ring-slate-900 w-20 h-20 mx-auto sm:mx-0"
               />
@@ -263,19 +263,16 @@
 </template>
 <script setup lang="ts">
 import { useProviderApiRepository } from "~/repositories/providers.repo";
-
+import { formatPrice } from "~/utils/number";
 interface GallerySample {
   id: string | number;
   image_url: string;
 }
-
+// 1. Data State
 const route = useRoute();
 const toast = useToast();
 const providerId = computed(() => String(route.params.provider || ""));
 const api = useProviderApiRepository();
-// 1. Data State
-const provider = ref();
-const gallery = ref<{ samples: GallerySample[] }>({ samples: [] });
 
 // 2. Pure Presentation Logic (Computed)
 const workEthic = computed(() => {
@@ -290,25 +287,30 @@ const workEthic = computed(() => {
 });
 
 // 3. Normalized Fetching
-const { error } = await useAsyncData(
-  `profile:${providerId.value}`,
-  async () => {
-    const res = await api.getFullProfile(providerId.value);
-    console.log(res);
-    if (!res.success || !res.data) {
-      if (import.meta.client)
-        toast.add({ title: "خطا", description: res.message, color: "error" });
-      throw new Error(res.message);
-    }
+const { data } = await useAsyncData(`profile:${providerId.value}`, async () => {
+  const res = await api.getFullProfile(providerId.value);
+  if (!res.success || !res.data) {
+    if (import.meta.client)
+      toast.add({ title: "خطا", description: res.message, color: "error" });
+    throw new Error(res.message);
+  }
 
-    provider.value = res.data?.provider;
-    gallery.value.samples = res.data?.samples || [];
-    return true;
-  },
-);
+  // RETURN the data so Nuxt can serialize it to the client
+  return res.data;
+});
+
+// 4. Create a computed property for 'provider' so it reacts to the data
+const provider = computed(() => data.value?.provider);
+const gallery = ref<{ samples: GallerySample[] }>({ samples: [] });
+
+// 5. Update gallery when data changes
+watchEffect(() => {
+  if (data.value?.samples) {
+    gallery.value.samples = data.value.samples;
+  }
+});
 
 // 4. Utility helpers
-const formatPrice = (n: number) => Number(n || 0).toLocaleString("fa-IR");
 
 function bookNow() {
   if (provider.value?.id) navigateTo(`/booking?provider=${provider.value.id}`);

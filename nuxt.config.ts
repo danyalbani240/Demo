@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     // Products page generated on demand, revalidates in background, cached until API response changes
     "/search": { swr: true },
     // Product pages generated on demand, revalidates in background, cached for 1 hour (3600 seconds)
-    "/providers/profile/**": { swr: 3600 },
+    "/providers/profile/**": { ssr: true },
   },
   // devtools: {
   //   enabled: process.env.NODE_ENV !== "production",
@@ -18,7 +18,9 @@ export default defineNuxtConfig({
   //   },
   // },
   devtools: false,
-
+  experimental: {
+    payloadExtraction: false,
+  },
   modules: [
     "@nuxt/ui",
     [
