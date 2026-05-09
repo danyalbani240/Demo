@@ -66,7 +66,7 @@ export const useAuthStore = defineStore("auth", {
       try {
         const res = await api.login(payload.phone, payload.password);
 
-        if (res.success && res.data) {
+        if (!!res && res.success && res.data) {
           if (res.data.needsOtp) {
             this.pendingOtp = {
               phone: res.data.phone!,
