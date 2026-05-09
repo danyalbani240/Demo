@@ -1,4 +1,8 @@
 export default defineNuxtPlugin(async () => {
-    let bootStrapStore = useBootstrapStore();
-    await bootStrapStore.fetchBootstrap()
+  let bootStrapStore = useBootstrapStore();
+  try {
+    await bootStrapStore.fetchBootstrap();
+  } catch (e) {
+    console.log(e);
+  }
 });
