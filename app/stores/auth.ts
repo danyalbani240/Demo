@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
+import { useAuthApiRepository } from "~/repositories/auth.repo";
+import type { OtpPayload, SignUpPayload } from "~/types/auth";
+import { isValidIranPhone } from "~/utils/auth/normalizePhone";
 
 type OtpPurpose = "signup" | "login" | "reset";
 type PublicUser = any;
 
-function isValidIranPhone(phone: string) {
-  return /^09\d{9}$/.test(String(phone || "").trim());
-}
+const api = useAuthApiRepository();
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -32,17 +33,10 @@ export const useAuthStore = defineStore("auth", {
     async init(force = false) {
       // if already ready, don't refetch
       if ((this.ready || this.initializing) && !force) return null;
-      let returnValue = null;
+
       this.initializing = true;
       try {
-        const headers = import.meta.server
-          ? useRequestHeaders(["cookie"])
-          : undefined;
-
-        const res: any = await $fetch("/api/auth/me", {
-          method: "GET",
-          headers,
-        });
+        const res = await api.getUserData();
         if (res?.success) {
           this.user = res.data?.user ?? null;
           this.next = res.data?.next ?? "";
@@ -50,7 +44,7 @@ export const useAuthStore = defineStore("auth", {
           this.user = null;
           this.next = "";
         }
-        returnValue = res;
+        return res;
       } catch {
         this.user = null;
         this.next = "";
@@ -59,48 +53,32 @@ export const useAuthStore = defineStore("auth", {
         this.ready = true;
       }
 
-      return returnValue;
+      return null;
     },
 
     async login(payload: { phone: string; password: string }) {
-      const phone = String(payload.phone || "").trim();
-      const password = String(payload.password || "");
-
-      if (!isValidIranPhone(phone))
+      if (!isValidIranPhone(payload.phone))
         return { ok: false as const, message: "شماره موبایل معتبر نیست" };
-      if (!password)
+      if (!payload.password)
         return { ok: false as const, message: "رمز عبور الزامی است" };
 
       this.loading = true;
       try {
-        const res: any = await $fetch("/api/auth/login", {
-          method: "POST",
-          body: { phone, password },
-        });
+        const res = await api.login(payload.phone, payload.password);
 
-        if (!res?.success) {
-          return {
-            ok: false as const,
-            message: res?.message || "ورود ناموفق بود",
-          };
+        if (res.success && res.data) {
+          if (res.data.needsOtp) {
+            this.pendingOtp = {
+              phone: res.data.phone!,
+              purpose: "login",
+              mode: "login",
+            };
+          } else {
+            this.user = res.data.user;
+            this.pendingOtp = null;
+          }
         }
-
-        const data = res.data;
-
-        if (data?.needsOtp) {
-          this.pendingOtp = {
-            phone: data.phone,
-            purpose: "login",
-            mode: "login",
-          };
-          return { ok: true as const, needsOtp: true as const };
-        }
-
-        this.user = data?.user ?? null;
-        this.next = data?.next ?? "";
-        this.pendingOtp = null;
-
-        return { ok: true as const, needsOtp: false as const };
+        return res;
       } catch (e: any) {
         return {
           ok: false as const,
@@ -112,21 +90,10 @@ export const useAuthStore = defineStore("auth", {
     },
 
     // stores/auth.ts (replace only signupStart action)
-    async signupStart(payload: {
-      full_name: string;
-      phone: string;
-      password: string;
-      role: "user" | "provider";
-    }) {
-      const full_name = String(payload.full_name || "").trim();
-      const phone = String(payload.phone || "").trim();
-      const password = String(payload.password || "");
-      const role = payload.role;
-
-      if (!full_name) return { ok: false as const, message: "نام الزامی است" };
-      if (!isValidIranPhone(phone))
+    async signupStart(payload: SignUpPayload) {
+      if (!isValidIranPhone(payload.phone))
         return { ok: false as const, message: "شماره موبایل معتبر نیست" };
-      if (password.length < 6)
+      if (payload.password.length < 6)
         return {
           ok: false as const,
           message: "رمز عبور باید حداقل ۶ کاراکتر باشد",
@@ -134,10 +101,7 @@ export const useAuthStore = defineStore("auth", {
 
       this.loading = true;
       try {
-        const res: any = await $fetch("/api/auth/signup/start", {
-          method: "POST",
-          body: { full_name, phone, password, role },
-        });
+        const res = await api.signUpStart(payload);
 
         if (!res?.success) {
           return {
@@ -146,25 +110,28 @@ export const useAuthStore = defineStore("auth", {
           };
         }
 
-        const data = res.data || {};
-
         // ✅ OTP mode (backend returns phone/purpose)
-        if (data?.phone && data?.purpose === "signup" && !data?.user) {
-          this.pendingOtp = {
-            phone: data.phone,
-            purpose: "signup",
-            mode: "signup",
-          };
-          return { ok: true as const, needsOtp: true as const };
+        if (res.success && res.data) {
+          if (
+            res.data?.purpose === "signup" &&
+            !res.data?.user &&
+            res.data.phone
+          ) {
+            this.pendingOtp = {
+              phone: res.data.phone,
+              purpose: "signup",
+              mode: "signup",
+            };
+            return { ok: true as const, needsOtp: true as const };
+          }
+          if (!res.data.user) {
+            return { ok: false as const, message: "پاسخ سرور نامعتبر است" };
+          }
         }
 
         // ✅ No-OTP mode (backend returns user+next)
-        const user = data?.user ?? null;
-        const next = String(data?.next ?? "");
-
-        if (!user) {
-          return { ok: false as const, message: "پاسخ سرور نامعتبر است" };
-        }
+        const user = res.data?.user ?? null;
+        const next = String(res.data?.next ?? "");
 
         this.user = user;
         this.next = next;
@@ -181,42 +148,22 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    async verifyOtp(payload: {
-      phone: string;
-      code: string;
-      purpose: "login" | "signup";
-    }) {
-      const phone = String(payload.phone || "").trim();
-      const code = String(payload.code || "").trim();
-
-      if (!isValidIranPhone(phone))
-        return { ok: false as const, message: "شماره موبایل معتبر نیست" };
-      if (!code) return { ok: false as const, message: "کد تایید الزامی است" };
-
+    async verifyOtp(payload: OtpPayload) {
       this.loading = true;
       try {
-        const endpoint =
-          payload.purpose === "signup"
-            ? "/api/auth/signup/verify"
-            : "/api/auth/login/verify";
+        const res: any = await api.verifyOtp(payload);
 
-        const res: any = await $fetch(endpoint, {
-          method: "POST",
-          body: { phone, code },
-        });
+        if (res?.success && res.data) {
+          this.user = res.data?.user ?? null;
+          this.next = res.data?.next ?? "";
+          this.pendingOtp = null;
 
-        if (!res?.success) {
-          return {
-            ok: false as const,
-            message: res?.message || "تایید ناموفق بود",
-          };
+          return { ok: true as const };
         }
-
-        this.user = res.data?.user ?? null;
-        this.next = res.data?.next ?? "";
-        this.pendingOtp = null;
-
-        return { ok: true as const };
+        return {
+          ok: false as const,
+          message: res?.message || "تایید ناموفق بود",
+        };
       } catch (e: any) {
         return {
           ok: false as const,
@@ -236,38 +183,6 @@ export const useAuthStore = defineStore("auth", {
         this.next = "";
         this.pendingOtp = null;
         this.ready = false; // optional: forces re-init after logout if page wants
-        this.loading = false;
-      }
-    },
-
-    async updateProfile(payload: any) {
-      this.loading = true;
-      try {
-        const res: any = await $fetch("/api/auth/me", {
-          method: "PATCH",
-          body: payload,
-        });
-
-        if (!res?.success) {
-          return {
-            ok: false as const,
-            message: res?.message || "بروزرسانی پروفایل ناموفق بود",
-          };
-        }
-
-        // refresh
-        this.ready = false;
-        await this.init();
-        return { ok: true as const };
-      } catch (e: any) {
-        return {
-          ok: false as const,
-          message:
-            e?.data?.message ||
-            e?.statusMessage ||
-            "بروزرسانی پروفایل ناموفق بود",
-        };
-      } finally {
         this.loading = false;
       }
     },
