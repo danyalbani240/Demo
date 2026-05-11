@@ -6,7 +6,9 @@
       "badge_calendar": "Accurate booking calendar",
       "badge_fast": "Fast booking",
       "badge_trust": "Real data and feedback",
-
+      "service_name": "Service Name",
+      "city": "City",
+      "search": "Search",
       "card": {
         "title": "Booking with real-time calendar",
         "desc": "See real availability—no overlaps, no “call later”.",

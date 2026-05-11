@@ -3,7 +3,7 @@
     class="bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-40 transition-colors duration-300"
   >
     <UContainer class="flex items-center justify-between h-16">
-      <div class="flex items-center gap-3">
+      <div class="flex justify-between items-center gap-3">
         <NuxtLink
           to="/"
           class="flex items-center gap-2 group hover:opacity-80 transition-opacity duration-300"
@@ -12,19 +12,22 @@
             name="heroicons:sparkles"
             class="w-6 h-6 text-primary-600 dark:text-primary-400 group-hover:animate-spin transition-all"
           />
-          <span class="font-extrabold text-slate-900 dark:text-slate-50">
+          <span
+            class="font-extrabold text-slate-900 dark:text-slate-50 hidden sm:block"
+          >
             {{ $t("header.brand") }}
           </span>
         </NuxtLink>
         <USelectMenu
           style="direction: rtl"
-          v-model="locale"
+          :model-value="locale"
           :items="items"
           value-key="value"
           label-key="label"
-          class="w-28 rtl"
+          class="md:w-28 rtl"
           @update:model-value="switchLang"
         />
+
         <UBadge
           color="neutral"
           variant="soft"
@@ -103,9 +106,14 @@ const { locale, locales, setLocale, loadLocaleMessages } = useI18n();
 async function switchLang(code: "fa" | "en" | "ku") {
   const loader = useLoader();
   loader.show();
-  await loadLocaleMessages(code); // forces fetch of messages
-  await setLocale(code);
-  loader.hide();
+  try {
+    // await loadLocaleMessages(code); // forces fetch of messages
+    await setLocale(code);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    loader.hide();
+  }
 }
 
 const items = computed(() =>

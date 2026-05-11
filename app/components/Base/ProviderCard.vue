@@ -1,6 +1,6 @@
 <template>
   <article
-    class="group w-full max-w-[560px] rounded-3xl border border-slate-200/70 bg-white/75 p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/40"
+    class="group w-full max-w-140 rounded-3xl border border-slate-200/70 bg-white/75 p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/40"
   >
     <div class="flex items-start gap-3">
       <UAvatar :src="provider.avatar || undefined" size="lg" />
@@ -82,7 +82,7 @@
     <!-- buttons -->
     <div class="mt-4 grid grid-cols-3 gap-2">
       <button
-        class="btn-secondary"
+        class="rounded-2xl border border-slate-200 bg-white/70 px-3 py-2 text-sm font-semibold hover:bg-white transition dark:border-slate-800 dark:bg-slate-900/30 dark:hover:bg-slate-900/50"
         @click="openServices(provider)"
         type="button"
       >
@@ -90,7 +90,7 @@
       </button>
 
       <button
-        class="btn-secondary"
+        class="rounded-2xl border border-slate-200 bg-white/70 px-3 py-2 text-sm font-semibold hover:bg-white transition dark:border-slate-800 dark:bg-slate-900/30 dark:hover:bg-slate-900/50"
         :disabled="provider.is_active === false"
         @click="go(provider)"
         type="button"
@@ -99,7 +99,7 @@
       </button>
 
       <button
-        class="btn-primary"
+        class="rounded-2xl bg-slate-900 px-3 py-2 text-sm font-extrabold text-white hover:bg-slate-800 transition disabled:opacity-60 disabled:cursor-not-allowed dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
         :disabled="provider.is_active === false"
         @click="book(provider)"
         type="button"

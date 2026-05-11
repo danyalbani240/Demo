@@ -44,7 +44,6 @@ export default defineNuxtConfig({
             file: "ku.json",
           },
         ],
-        lazy: true,
         langDir: "locales",
         defaultLocale: "ku",
         strategy: "no_prefix",

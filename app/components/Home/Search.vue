@@ -6,14 +6,14 @@
       <USelect
         v-model="query.categorySlug"
         :items="categoryOptions"
-        placeholder="نام سرویس"
+        :placeholder="$t('home.hero.service_name')"
         class="dark:bg-slate-900 dark:border-slate-700"
       />
 
       <USelect
         v-model="query.city"
         :items="cityOptions"
-        placeholder="شهر"
+        :placeholder="$t('home.hero.city')"
         class="dark:bg-slate-900 dark:border-slate-700"
       />
       <UButton
@@ -25,7 +25,7 @@
           name="i-heroicons-magnifying-glass-20-solid"
           class="w-5 h-5 ml-1"
         />
-        جستجو
+        {{ $t("home.hero.search") }}
       </UButton>
     </div>
   </UCard>
@@ -34,7 +34,6 @@
 <script setup lang="ts">
 import { allCategoriesValue, allCitiesValue } from "~/constants/search";
 import type { Category, City } from "~/types";
-
 
 import { buildCategoryOptions, buildCityOptions } from "~/utils/search/options";
 const props = defineProps<{
