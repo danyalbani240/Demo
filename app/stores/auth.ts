@@ -74,6 +74,7 @@ export const useAuthStore = defineStore("auth", {
               mode: "login",
             };
           } else {
+            this.next = `https://service-hub-demo.vercel.app/auth/sso?token=${res.data.ssoToken}`;
             this.user = res.data.user;
             this.pendingOtp = null;
           }

@@ -54,7 +54,9 @@ export function useAuthPage(form: AuthFormState) {
 
     const authStore = useAuthStore();
 
-    await router.push(computeNext(authStore.next || "/dashboard"));
+    await navigateTo(computeNext(authStore.next || "/dashboard"), {
+      external: authStore.next.includes("http"),
+    });
   }
 
   function handleResult(

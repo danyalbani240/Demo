@@ -14,6 +14,7 @@ export interface AuthResponse {
   needsOtp?: boolean;
   phone?: string;
   purpose?: string;
+  ssoToken?: string;
 }
 export interface SignUpPayload {
   full_name: string;
