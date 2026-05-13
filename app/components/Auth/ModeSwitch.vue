@@ -12,7 +12,7 @@
       "
       @click="mode = 'login'"
     >
-      ورود
+      {{ $t("auth.login") }}
     </button>
 
     <button
@@ -25,13 +25,12 @@
       "
       @click="mode = 'register'"
     >
-      ثبت‌نام
+      {{ $t("auth.register") }}
     </button>
 
     <span
-      class="absolute inset-y-1 w-[calc(50%-8px)] rounded-xl border border-black/10 bg-white/95 shadow-sm backdrop-blur-md transition-transform duration-300 ease-[cubic-bezier(.2,.9,.2,1)] dark:border-white/10 dark:bg-white/10"
-      :class="mode === 'register' ? '-translate-x-full' : 'translate-x-0'"
-      style="right: 4px"
+      class="absolute inset-y-1 w-[calc(50%-8px)] rounded-xl border border-black/10 bg-white/95 shadow-sm backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(.2,.9,.2,1)] dark:border-white/10 dark:bg-white/10 start-[4px]"
+      :class="mode === 'register' ? 'start-[calc(50%+4px)]' : 'start-[4px]'"
     />
   </div>
 </template>

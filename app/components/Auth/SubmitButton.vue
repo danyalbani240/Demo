@@ -24,7 +24,7 @@
           class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
         />
 
-        در حال انجام...
+        {{ $t("auth.submit_loading") }}
       </span>
     </span>
   </button>

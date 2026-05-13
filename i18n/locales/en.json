@@ -705,5 +705,37 @@
       "title": "How does the verification process work?",
       "subtitle": "Step‑by‑step, trackable, and with minimal friction for providers."
     }
+  },
+  "auth": {
+    "full_name": "Full name",
+    "phone": "Phone number",
+    "password": "Password",
+    "confirm": "Confirm",
+    "login": "Login",
+    "register": "Register",
+    "terms_text": "By continuing, you agree to the Terms and Privacy Policy.",
+    "forgot_password": "Forgot password?",
+    "recover_password": "Recover password",
+    "welcome": "Welcome 👋",
+    "start": "Let’s get started 🚀",
+    "intro_login": "Login with your phone number and password to continue.",
+    "intro_customer": "Create a customer account using your phone number and password.",
+    "intro_provider": "Create a provider account using your phone number and password.",
+    "otp_sent": "Verification code sent to",
+    "resend": "Resend",
+    "change_number": "Change number",
+    "verify": "Verify",
+    "password_strength": "Password strength",
+    "min_password_hint": "At least 8 characters + number or symbol is better",
+    "customer": "Customer",
+    "provider": "Provider",
+    "customer_desc": "Book services",
+    "provider_desc": "Register business",
+    "submit_loading": "Processing..."
+  },
+  "site": {
+    "supportHours": "Support available during working hours (9–18)",
+    "supportResponseSla": "Initial response is usually within 24 working hours.",
+    "authMethod": "Login is done using mobile number and password. Some accounts may require an SMS verification code."
   }
 }
