@@ -74,6 +74,7 @@ export const useAuthStore = defineStore("auth", {
               mode: "login",
             };
           } else {
+            // using sso token to redirect to dashboard and the reall app in general
             this.next = `https://service-hub-demo.vercel.app/auth/sso?token=${res.data.ssoToken}`;
             this.user = res.data.user;
             this.pendingOtp = null;
@@ -132,13 +133,15 @@ export const useAuthStore = defineStore("auth", {
 
         // ✅ No-OTP mode (backend returns user+next)
         const user = res.data?.user ?? null;
-        const next = String(res.data?.next ?? "");
+
+        // this is for backward compatibility :
+        // const next = String(res.data?.next ?? "");
 
         this.user = user;
-        this.next = next;
+        this.next = `https://service-hub-demo.vercel.app/auth/sso?token=${res.data?.ssoToken}`;
         this.pendingOtp = null;
 
-        return { ok: true as const, needsOtp: false as const, next };
+        return { ok: true as const, needsOtp: false as const, next: this.next };
       } catch (e: any) {
         return {
           ok: false as const,
