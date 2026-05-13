@@ -19,7 +19,7 @@
           </span>
         </NuxtLink>
         <USelectMenu
-          style="direction: rtl"
+          :style="`direction: ${locale === 'en' ? 'ltr' : 'rtl'}`"
           :model-value="locale"
           :items="items"
           value-key="value"
@@ -102,7 +102,7 @@ import { useDarkMode } from "~/composables/useDarkMode";
 import { siteConfig } from "~/constants/site";
 const { toggleDarkMode } = useDarkMode();
 
-const { locale, locales, setLocale, loadLocaleMessages } = useI18n();
+const { locale, locales, setLocale } = useI18n();
 async function switchLang(code: "fa" | "en" | "ku") {
   const loader = useLoader();
   loader.show();
