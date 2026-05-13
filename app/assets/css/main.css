@@ -9,11 +9,17 @@ body {
 [aria-controls*="reka-select-content-v"] {
   direction: rtl;
 }
+[dir="ltr"] [aria-controls*="reka-select-content-v"] {
+  direction: ltr;
+}
 
 /*  rtling the select */
 
 [data-reka-popper-content-wrapper] .isolate {
   direction: rtl !important;
+}
+[dir="ltr"] [data-reka-popper-content-wrapper] .isolate {
+  direction: ltr !important;
 }
 /*fix */
 /* assets/css/main.css */
