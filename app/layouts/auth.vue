@@ -1,6 +1,6 @@
 <template>
   <!-- Force theme class here so Tailwind dark: and CSS both work -->
-  <SiteHeader />
+  <Header />
   <div class="min-h-[100dvh]">
     <!-- Page background must change with theme -->
     <div class="min-h-[100dvh] bg-white dark:bg-zinc-950">
