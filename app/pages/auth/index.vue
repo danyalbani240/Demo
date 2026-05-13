@@ -1,6 +1,5 @@
 <template>
   <div class="relative min-h-screen overflow-hidden isolate dark:bg-zinc-950">
-    <!-- background (Tailwind theme-aware) -->
     <div
       class="auth-bg absolute inset-0 -z-10 dark:bg-zinc-950!"
       aria-hidden="true"
@@ -95,6 +94,17 @@ const {
 } = useAuthPage(form);
 
 useAuthPersistence(form);
+let toast = useToast();
+
+onMounted(() => {
+  toast.add({
+    title: "This is a demo",
+    description:
+      "please check My telegram channel (@smokingDev) Auth section for more info  Thank you .",
+    duration: 600000,
+    ui: { description: "text-center", title: "text-2xl text-center " },
+  });
+});
 </script>
 <style scoped>
 /* background gradients must be CSS (Tailwind can't express this well) */
