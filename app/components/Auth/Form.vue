@@ -7,8 +7,9 @@
     <div key="email" class="relative">
       <AuthInput label="تلفن" v-model="form.phone" />
     </div>
-
-    <AuthPasswordInput v-model="form.password" />
+    <div key="password" class="relative">
+      <AuthPasswordInput v-model="form.password" />
+    </div>
   </TransitionGroup>
 
   <AuthSubmitButton
