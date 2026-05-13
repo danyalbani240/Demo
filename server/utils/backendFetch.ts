@@ -11,8 +11,6 @@ function getSetCookieHeaders(headers: Headers): string[] {
   const single = headers.get("set-cookie");
   if (!single) return [];
 
-  // If your backend only sets one cookie, this is fine.
-  // If it sets multiple, they might be merged and hard to split correctly.
   // Still return as one header to avoid corrupting it by naive splitting.
   return [single];
 }
@@ -51,32 +49,19 @@ export async function backendFetch<T = any>(
     if (setCookies.length) {
       // If multiple cookies, set as an array so h3 sends multiple headers
 
-      for (const c of setCookies){
-         appendResponseHeader(event, "set-cookie", c)
-      };
+      for (const c of setCookies) {
+        appendResponseHeader(event, "set-cookie", c);
+      }
     }
 
     return res._data as T;
   } catch (error: any) {
     // If there's a network error or other issue, throw it
-    if (error.name === 'FetchError' || !error.response) {
+    if (error.name === "FetchError" || !error.response) {
       throw error;
     }
-    
+
     // For HTTP errors, return the error data
     return error.response._data as T;
   }
-}
-
-/**
- * @deprecated Use backendFetch instead - this function ensures proper error handling
- * This is kept for backward compatibility but should not be used directly
- */
-export async function unsafeBackendFetch<T = any>(
-  event: H3Event,
-  path: string,
-  opts: Parameters<typeof $fetch<T>>[1] = {},
-): Promise<T> {
-  console.warn('⚠️ unsafeBackendFetch is deprecated - use backendFetch instead');
-  return backendFetch<T>(event, path, opts);
 }
