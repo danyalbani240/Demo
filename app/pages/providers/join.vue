@@ -8,7 +8,7 @@
       <UContainer class="flex items-center justify-between gap-3 py-2 text-sm">
         <div class="flex items-center gap-2">
           <UIcon name="i-heroicons-shield-check" class="h-5 w-5" />
-          <span>احراز هویت | پرداخت امن | {{ siteCopy.supportHours }}</span>
+          <span>احراز هویت | پرداخت امن | {{ $t("site.supportHours") }}</span>
         </div>
         <NuxtLink
           to="/policies"

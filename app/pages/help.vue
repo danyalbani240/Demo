@@ -174,8 +174,8 @@
           <div>
             <p class="font-bold">{{ $t("faq.help.title") }}</p>
             <p class="text-sm text-gray-600">
-              {{ siteCopy.supportHours }} {{ $t("faq.and") }}
-              {{ siteCopy.supportResponseSla }}
+              {{ $t("site.supportHours") }} {{ $t("faq.and") }}
+              {{ $t("site.supportResponseSla") }}
             </p>
           </div>
           <div class="flex gap-2">

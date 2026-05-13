@@ -31,7 +31,7 @@
                 <span class="font-bold text-gray-800 dark:text-white">{{
                   siteCopy.supportHours
                 }}</span>
-                {{ $t("contact.hero.and") }} {{ siteCopy.supportResponseSla }}
+                {{ $t("contact.hero.and") }} {{ $t("site.supportResponseSla") }}
               </p>
 
               <div class="mt-5 flex flex-wrap gap-2">
@@ -374,7 +374,7 @@
               </li>
               <li class="flex items-center gap-2">
                 <UIcon name="i-heroicons-clock" class="w-5 h-5 opacity-80" />
-                <span>{{ siteCopy.supportHours }}</span>
+                <span>{{ $t("site.supportHours") }}</span>
               </li>
             </ul>
 
